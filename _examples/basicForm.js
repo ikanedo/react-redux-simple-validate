@@ -1,21 +1,9 @@
-# react-simple-validate
-React Redux Form validator inspired by jquery validate
-
-## Installation
-
-    % npm install react-simple-validate
-
-## Demo
-
-    % npm run start
-
-## Usage
-
-### Basic form component.
-
-Run the demmo and see the "_examples" directory for implementation examples.
-
-```js
+import React, { Component, PropTypes } from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { store } from './basicStore';
+import Form from 'src/forms/form';
+import FormError from 'src/forms/formError';
 
 export default class BasicForm extends Component {
   constructor() {
@@ -41,6 +29,8 @@ export default class BasicForm extends Component {
 
   render() {
     return (
+      <div>
+        <hr />
         <Form
           formName={this.props.name}
           handleValidForm={this.handleValidForm}
@@ -54,8 +44,18 @@ export default class BasicForm extends Component {
             <FormError forInput="exampleInput" />
           </div>
         </Form>
+      </div>
     );
   }
 }
 
-```
+BasicForm.propTypes = {
+  name: PropTypes.string.isRequired
+};
+
+ReactDOM.render(
+  <Provider store={store}>
+    <BasicForm name="Basic" />
+  </Provider>,
+  document.getElementById('basicForm')
+);
