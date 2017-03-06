@@ -13,7 +13,7 @@ React Redux Form validator inspired by jquery validate
 
 ### Basic form component.
 
-Run the demmo and see the "_examples" directory for implementation examples.
+Run the demo and see the "_examples" directory for implementation examples.
 
 ```js
 
