@@ -1,5 +1,5 @@
 import validate from 'validate.js';
-import 'src/validators/adapters/minlength';
+import './minlength';
 
 describe('Validator Adapter - minlength', () => {
   let constraints;

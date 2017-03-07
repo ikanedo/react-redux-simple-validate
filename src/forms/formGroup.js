@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import Validator from 'src/validators/validator';
+import Validator from '../validators/validator';
 import formElementFromEvt from './formElement/formElementFromEvt';
 import formBuilder from './formBuilder';
 import { filterValidation, getFormData } from './formUtils';

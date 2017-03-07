@@ -1,5 +1,5 @@
-import forms from 'src/forms/formReducer';
-import * as CONST from 'src/forms/formConstants';
+import forms from './formReducer';
+import * as CONST from './formConstants';
 
 describe('Form Reducer', () => {
   const FORM_NAME = 'Giftcard';

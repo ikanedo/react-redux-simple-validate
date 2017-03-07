@@ -1,5 +1,5 @@
 import validate from 'validate.js';
-import 'src/validators/adapters/required';
+import './required';
 
 describe('Validator Adapter - required', () => {
   let constraints;

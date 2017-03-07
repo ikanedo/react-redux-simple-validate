@@ -1,5 +1,5 @@
 import React from 'react';
-import formElementFromReact from 'src/forms/formElement/formElementFromReact';
+import formElementFromReact from './formElementFromReact';
 
 describe('FormElementFromReact', () => {
   describe('Use this to get the value from the React object', () => {

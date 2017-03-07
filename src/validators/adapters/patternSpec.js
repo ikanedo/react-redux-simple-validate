@@ -1,5 +1,5 @@
 import validate from 'validate.js';
-import 'src/validators/adapters/pattern';
+import './pattern';
 
 describe('Validator Adapter - pattern', () => {
   let constraints;

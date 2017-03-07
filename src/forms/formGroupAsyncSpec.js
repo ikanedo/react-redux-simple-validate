@@ -1,4 +1,4 @@
-import FormGroupAsync from 'src/forms/formGroupAsync';
+import FormGroupAsync from './formGroupAsync';
 
 describe('FormGroupAsync', () => {
   describe(

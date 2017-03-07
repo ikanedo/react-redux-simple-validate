@@ -1,4 +1,4 @@
-import Validator from 'src/validators/validator';
+import Validator from './validator';
 
 /*
   TODO: still need to create adapters for 'async' validation

@@ -4,9 +4,9 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { mount } from 'enzyme';
-import ConnectedForm from 'src/forms/form';
-import * as CONST from 'src/forms/formConstants';
-import FormError from 'src/forms/formError';
+import ConnectedForm from './form';
+import * as CONST from './formConstants';
+import FormError from './formError';
 
 describe('Form Container', () => {
   describe(

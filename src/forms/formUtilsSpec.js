@@ -1,7 +1,7 @@
 import React from 'react';
-import * as utils from 'src/forms/formUtils';
+import * as utils from './formUtils';
 import { shallow } from 'enzyme';
-import FormGroup from 'src/forms/formGroup';
+import FormGroup from './formGroup';
 
 describe('Form Utilities', () => {
   describe('isAReactEl', () => {

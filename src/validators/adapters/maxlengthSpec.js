@@ -1,5 +1,5 @@
 import validate from 'validate.js';
-import 'src/validators/adapters/maxlength';
+import './maxlength';
 
 describe('Validator Adapter - maxlength', () => {
   let constraints;

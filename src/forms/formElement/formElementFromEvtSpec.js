@@ -1,4 +1,4 @@
-import formElementFromEvt from 'src/forms/formElement/formElementFromEvt';
+import formElementFromEvt from './formElementFromEvt';
 
 describe('FormElementFromEvt', () => {
   describe('Use this to get the value from the event object', () => {

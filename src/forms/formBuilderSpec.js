@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import formBuilder from 'src/forms/formBuilder';
-import FormError from 'src/forms/formError';
+import formBuilder from './formBuilder';
+import FormError from './formError';
 
 describe('formBuilder', () => {
   describe(

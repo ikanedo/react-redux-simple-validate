@@ -1,5 +1,5 @@
 import validate from 'validate.js';
-import 'src/validators/adapters/equalTo';
+import './equalTo';
 
 describe('Validator Adapter - equalTo', () => {
   let constraints;

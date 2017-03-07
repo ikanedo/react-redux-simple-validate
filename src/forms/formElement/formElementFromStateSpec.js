@@ -1,5 +1,5 @@
 import React from 'react';
-import formElementFromState from 'src/forms/formElement/formElementFromState';
+import formElementFromState from './formElementFromState';
 
 describe('FormValueAttr', () => {
   describe(

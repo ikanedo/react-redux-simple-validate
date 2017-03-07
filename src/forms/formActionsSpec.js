@@ -1,5 +1,5 @@
-import * as Action from 'src/forms/formActions';
-import * as CONST from 'src/forms/formConstants';
+import * as Action from './formActions';
+import * as CONST from './formConstants';
 
 describe('Form Actions', () => {
   describe('setInitialData', () => {

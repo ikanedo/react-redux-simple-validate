@@ -4,7 +4,7 @@ import {
   getFormInputType,
   getFormElementType,
   getFormElementRefName
-} from 'src/forms/formElement/formElementUtils';
+} from './formElementUtils';
 
 describe('FormElementUtils', () => {
   describe('getFormInputType', () => {
