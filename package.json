@@ -40,7 +40,6 @@
   "license": "MIT",
   "jspm": {
     "dependencies": {
-      "css": "github:systemjs/plugin-css@^0.1.26",
       "enzyme": "npm:enzyme@^2.7.0",
       "jsx": "github:floatdrop/plugin-jsx@^1.2.1",
       "lodash": "npm:lodash@^4.14.1",
