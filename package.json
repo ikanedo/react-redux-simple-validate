@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "React Form decorator and validator inspired by jquery validate.",
   "main": "index.js",
-  "directories": {
-    "lib": "src"
-  },
   "devDependencies": {
     "babel-core": "^6.23.1",
     "babel-plugin-transform-object-rest-spread": "^6.6.5",
