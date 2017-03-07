@@ -12,7 +12,7 @@ For a demo project setup, see https://github.com/ikanedo/react-redux-simple-vali
 
 ### Basic form component.
 
-Run the demo and see the "_examples" directory for implementation examples.
+Run the demo project and see "basicForm.js" for implementation details.
 
 ```js
 
