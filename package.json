@@ -14,7 +14,6 @@
     "eslint-config-airbnb": "^6.2.0",
     "eslint-plugin-react": "^4.2.3",
     "glob": "^7.1.1",
-    "http-server": "^0.9.0",
     "isparta": "^4.0.0",
     "istanbul": "github:gotwarlost/istanbul#source-map",
     "jasmine": "^2.5.3",
@@ -40,21 +39,20 @@
   "license": "MIT",
   "jspm": {
     "dependencies": {
-      "enzyme": "npm:enzyme@^2.7.0",
       "jsx": "github:floatdrop/plugin-jsx@^1.2.1",
       "lodash": "npm:lodash@^4.14.1",
       "react": "npm:react@^15.4.1",
-      "react-addons-test-utils": "npm:react-addons-test-utils@^15.4.1",
-      "react-dom": "npm:react-dom@^15.4.1",
       "react-redux": "npm:react-redux@^5.0.3",
       "redux": "npm:redux@^3.6.0",
-      "redux-thunk": "npm:redux-thunk@^2.1.0",
       "validate.js": "npm:validate.js@^0.10.0"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^6.3.17",
       "babel-runtime": "npm:babel-runtime@^5.8.24",
-      "core-js": "npm:core-js@^1.1.4"
+      "core-js": "npm:core-js@^1.1.4",
+      "enzyme": "npm:enzyme@^2.7.0",
+      "react-addons-test-utils": "npm:react-addons-test-utils@^15.4.1",
+      "redux-thunk": "npm:redux-thunk@^2.2.0"
     },
     "overrides": {
       "npm:enzyme@2.7.0": {
