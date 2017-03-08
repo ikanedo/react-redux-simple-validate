@@ -84,5 +84,32 @@ Please see formActions.js for the related action creators. There are other actio
 | FORM_RESET              | Sets values and errors to be empty.  NOTE: If you give the form element a defaultValue, it will be reverted back to that value on reset. If you want to 'clean' the form, then you will need to set the value to an empty string. |
 | FORM_TRIGGER_VALIDATION | Programmatically validate a given                                                                                                                                                                                                 |
 
-## Validation
-Please see https://github.com/ikanedo/validate-jquery-validate
+## Validation Rules supported
+Available rules are as follows
+
+```js
+const validation = {
+  rules: {
+    exampleInput: {
+      required: true,
+      minlength: 2,
+      maxlength: 255,
+      equalTo: '[name=password]',
+      pattern: "^[A-Za-z0-9._'%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$|^$"
+    }
+  },
+  messages: {
+    exampleInput: {
+      required: 'This is required',
+      minlength: 'Too short',
+      maxlength: 'Too long',
+      equalTo: 'Passwords are not the same',
+      pattern: 'Email address format is invalid'
+    }
+  }
+}
+
+```
+
+### What if the rule I want is not supported?
+Internally, the code uses [validate.js](https://validatejs.org/). Please feel free to [create a new adapter](https://validatejs.org/#custom-validator) if a particular rule is not yet supported. Once you have written your adapter, add your adapter in `src/validators/adapters` and inject the adapter in `src/validators/validator.js`
