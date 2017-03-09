@@ -1,9 +1,10 @@
 {
   "name": "react-redux-simple-validate",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React Form decorator and validator inspired by jquery validate.",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "devDependencies": {
+    "babel-cli": "^6.23.0",
     "babel-core": "^6.23.1",
     "babel-plugin-transform-object-rest-spread": "^6.6.5",
     "babel-polyfill": "^6.23.0",
@@ -33,7 +34,9 @@
     "phantomjs": "^2.1.7"
   },
   "scripts": {
-    "test": "karma start karma.conf.js"
+    "test": "karma start karma.conf.js",
+    "compile": "babel --source-maps -d lib/ src/",
+    "prepublish": "npm run compile"
   },
   "author": "Kane Balagtey",
   "license": "MIT",

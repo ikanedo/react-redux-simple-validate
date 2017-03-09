@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/validators/adapters/required.js"],"names":["validators","required","presence"],"mappings":";;AAAA;;;;;;AAEA,mBAASA,UAAT,CAAoBC,QAApB,GAA+B,mBAASD,UAAT,CAAoBE,QAAnD","file":"required.js","sourcesContent":["import validate from 'validate.js';\n\nvalidate.validators.required = validate.validators.presence;\n"]}

@@ -1,2 +1,7 @@
 import Form from './forms/form';
-export default Form;
+import FormGroup from './forms/form';
+import FormGroupAsync from './forms/form';
+import FormError from './forms/form';
+import FormReducer from './forms/form';
+
+export { Form, FormGroup, FormGroupAsync, FormError, FormReducer };
