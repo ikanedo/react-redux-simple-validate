@@ -3,7 +3,7 @@ React Redux Form validator inspired by jquery validate
 
 ## Installation
 
-    % jspm install github:ikanedo/react-redux-simple-validate
+    % npm install react-redux-simple-validate
 
 ## Demo
 For a demo project setup, see https://github.com/ikanedo/react-redux-simple-validator-example
