@@ -46,7 +46,7 @@ export default class BasicForm extends Component {
           handleValidForm={this.handleValidForm}
           validation={this.validation}
         >
-          <div id="add-error-class-to-this-div" data-form-error>
+          <div id="add-error-class-to-this-div" data-form-error="exampleInput">
             <input type="text" name="exampleInput" value="" />
             <button className="button">Submit</button>
           </div>
