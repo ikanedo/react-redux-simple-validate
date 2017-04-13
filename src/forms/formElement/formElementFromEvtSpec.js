@@ -13,7 +13,7 @@ describe('FormElementFromEvt', () => {
       const inputValue = formElementFromEvt({
         target: {
           value: 'Text'
-        },
+        }
       }).getVal();
       expect(inputValue).toBe('Text');
     });
@@ -21,7 +21,7 @@ describe('FormElementFromEvt', () => {
 
     it('SHOULD return an empty string if the value is undefined', () => {
       const inputValue = formElementFromEvt({
-        target: {},
+        target: {}
       }).getVal();
       expect(inputValue).toBe('');
     });
@@ -32,10 +32,11 @@ describe('FormElementFromEvt', () => {
           type: 'checkbox',
           checked: false,
           value: 'not this'
-        },
+        }
       }).getVal();
       expect(inputValue).toBeBoolean();
       expect(inputValue).not.toBe('not this');
     });
   });
 });
+

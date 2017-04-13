@@ -1,6 +1,6 @@
 export class FormElementFromEvt {
-  constructor(event) {
-    this.element = event.target;
+  constructor(event = {}) {
+    this.element = event.target || {};
   }
 
   getVal() {

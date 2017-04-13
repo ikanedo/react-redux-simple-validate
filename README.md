@@ -1,5 +1,6 @@
 # react-simple-validate
-React Redux Form validator inspired by jquery validate
+React Redux Form validator inspired by jquery validate 
+https://github.com/ikanedo/react-redux-simple-validate
 
 ## Installation
 
@@ -35,17 +36,17 @@ export default class BasicForm extends Component {
   }
 
   handleValidForm(data) {
-    console.log('call action here!', data);
+    console.log('hand your data here!', data);
   }
 
   render() {
     return (
         <Form
-          formName={this.props.name}
+          formName="basic"
           handleValidForm={this.handleValidForm}
           validation={this.validation}
         >
-          <div>
+          <div id="add-error-class-to-this-div" data-form-error>
             <input type="text" name="exampleInput" value="" />
             <button className="button">Submit</button>
           </div>
@@ -82,7 +83,7 @@ Please see formActions.js for the related action creators. There are other actio
 | FORM_DATA_REPLACE       | Replaces the state with the given params(values/errors)                                                                                                                                                                           |
 | FORM_DATA_MERGE         | Merges the current state with the given params(values/errors)                                                                                                                                                                     |
 | FORM_RESET              | Sets values and errors to be empty.  NOTE: If you give the form element a defaultValue, it will be reverted back to that value on reset. If you want to 'clean' the form, then you will need to set the value to an empty string. |
-| FORM_TRIGGER_VALIDATION | Programmatically validate a given                                                                                                                                                                                                 |
+| FORM_TRIGGER_VALIDATION | Programmatically validate a given form name                                                                                                                                                                                                |
 
 ## Validation Rules supported
 Available rules are as follows
@@ -112,4 +113,32 @@ const validation = {
 ```
 
 ### What if the rule I want is not supported?
-Internally, the code uses [validate.js](https://validatejs.org/). Please feel free to [create a new adapter](https://validatejs.org/#custom-validator) if a particular rule is not yet supported. Once you have written your adapter, add your adapter in `src/validators/adapters` and inject the adapter in `src/validators/validator.js`
+Internally, the code uses [validate.js](https://validatejs.org/). Please feel free to [create a new adapter](https://validatejs.org/#custom-validator) if a particular rule is not yet supported.
+
+### Example custom validator
+```js
+import validate from 'validate.js';
+
+const isThisABoolean = value => typeof(value) === "boolean";
+
+validate.validators.boolean = (value, options) => {  
+  return isThisABoolean(value) ? null : options.message;
+};
+
+```
+
+Once you have created your custom validator, simply inject the custom validator to your app and use it like so
+```js
+const validation = {
+  rules: {
+    exampleInput: {
+      boolean: true
+    }
+  },
+  messages: {
+    exampleInput: {
+      boolean: 'The value passed is not TRUE or FALSE'
+    }
+  }
+}
+```

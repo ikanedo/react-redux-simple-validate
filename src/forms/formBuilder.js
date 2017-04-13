@@ -5,6 +5,7 @@ import { isAReactEl, isAFormEl, isAFormGroup } from './formUtils';
 import { ERROR_INPUT_CLASS_NAME, HAS_VALUE_CLASS_NAME } from './formConstants';
 import { getFormElementRefName } from './formElement/formElementUtils';
 import formElementFromState from './formElement/formElementFromState';
+import formElementFromEvt from './formElement/formElementFromEvt';
 
 function isLikeStringOrNum(element) {
   return !isAReactEl(element);
@@ -12,6 +13,10 @@ function isLikeStringOrNum(element) {
 
 function isAnErrorEl({ type }) {
   return type.displayName === 'FormError';
+}
+
+function isAFormErrorElClass({ props }) {
+  return !!props['data-form-error'];
 }
 
 function getErrorMsg(name, errors) {
@@ -23,6 +28,16 @@ function getErrorElProps(element, { errors }) {
   return {
     ...element.props,
     msg: getErrorMsg(forInput, errors)
+  };
+}
+
+function getErrorClassElProps(element, { errors }) {
+  const inputName = element.props['data-form-error'];
+  const errorClassName = getErrorMsg(inputName, errors) ? '_is-error' : '';
+
+  return {
+    ...element.props,
+    className: `${element.props.className} ${errorClassName}`
   };
 }
 
@@ -43,25 +58,77 @@ function getErrorInputClassName(name, errors) {
   return hasErrors ? ERROR_INPUT_CLASS_NAME : '';
 }
 
-function getFormElProps(element, { errors, values, onValidate, onValueChange }) {
+function getValidateEvents(eventType, formGroupProps) {
+  const {
+    onValidate,
+    onInvalidate,
+    invalidateEvent,
+    validateEvent
+  } = formGroupProps;
+
+  if (
+    invalidateEvent === eventType
+    && validateEvent === eventType
+  ) {
+    return (...args) => {
+      onInvalidate(...args);
+      onValidate(...args);
+    };
+  }
+
+  if (invalidateEvent === eventType) {
+    return onInvalidate;
+  }
+
+  if (validateEvent === eventType) {
+    return onValidate;
+  }
+
+  return null;
+}
+
+let lastFocusValue = null;
+function getLastFocusValue(e) {
+  lastFocusValue = formElementFromEvt(e).getVal();
+}
+
+function getFormElProps(element, formGroupProps) {
   const {
     name,
     onChange,
     onBlur,
+    onFocus,
     className
   } = element.props;
+
+  const {
+    errors,
+    values,
+    onValueChange
+  } = formGroupProps;
+
   const formElementValue = formElementFromState(element, values).getKeyVal();
 
   if (isEmpty(name)) {
     throw new Error(`${element.type} element is missing a name attribute!`, element);
   }
 
+  const onChangeEvents = mergeCallbacks(onValueChange, onChange, getValidateEvents('onChange', formGroupProps));
+  const onFocusEvents = mergeCallbacks(onFocus, getLastFocusValue, getValidateEvents('onFocus', formGroupProps));
+  const onBlurEvents = mergeCallbacks(onBlur, getValidateEvents('onBlur', formGroupProps));
+
   return {
     ...element.props,
     key: name,
     ref: getFormElementRefName(element),
-    onChange: mergeCallbacks(onValueChange, onChange),
-    onBlur: mergeCallbacks(onValidate, onBlur),
+    onChange: onChangeEvents,
+    onFocus: onFocusEvents,
+    onBlur: e => {
+      const hasTheValueChanged = formElementFromEvt(e).getVal() !== lastFocusValue;
+      if (hasTheValueChanged) {
+        onBlurEvents(e);
+      }
+    },
     className: [
       className,
       getErrorInputClassName(name, errors),
@@ -74,6 +141,10 @@ function getFormElProps(element, { errors, values, onValidate, onValueChange }) 
 function getElProps(element, args) {
   if (isAFormEl(element)) {
     return getFormElProps(element, args);
+  }
+
+  if (isAFormErrorElClass(element)) {
+    return getErrorClassElProps(element, args);
   }
 
   if (isAnErrorEl(element)) {

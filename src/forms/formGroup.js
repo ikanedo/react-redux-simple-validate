@@ -10,6 +10,7 @@ export class FormGroup extends Component {
   constructor(props) {
     super(props);
     this.onValidate = this.onValidate.bind(this);
+    this.onInvalidate = this.onInvalidate.bind(this);
     this.onValueChange = this.onValueChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.formValidator = new Validator(
@@ -65,7 +66,7 @@ export class FormGroup extends Component {
       formName,
       setValidity,
       handleValidForm,
-      handleInvalidForm = () => {}
+      handleInvalidForm
     } = this.props;
     const formData = getFormData(children, this.refs);
     const errorMsgs = this.formValidator.validate(formData);
@@ -87,10 +88,32 @@ export class FormGroup extends Component {
     } = this.props;
     const formData = getFormData(children, this.refs);
     const errorMsgs = this.formValidator.single(e.target.name, formData);
-    setSingleValidity(
+    const isValid = !errorMsgs;
+
+    if (isValid) {
+      setSingleValidity(
+        formName,
+        { [e.target.name]: errorMsgs }
+      );
+    }
+  }
+
+  onInvalidate(e) {
+    const {
+      children,
       formName,
-      { [e.target.name]: errorMsgs }
-    );
+      setSingleValidity
+    } = this.props;
+    const formData = getFormData(children, this.refs);
+    const errorMsgs = this.formValidator.single(e.target.name, formData);
+    const isValid = !errorMsgs;
+
+    if (!isValid) {
+      setSingleValidity(
+        formName,
+        { [e.target.name]: errorMsgs }
+      );
+    }
   }
 
   onValueChange(e) {
@@ -109,23 +132,35 @@ export class FormGroup extends Component {
     const {
       children,
       values,
-      errors
+      errors,
+      invalidateEvent,
+      validateEvent,
+      className
     } = this.props;
     const formElements = formBuilder({
       onValidate: this.onValidate,
+      onInvalidate: this.onInvalidate,
       onValueChange: this.onValueChange,
       values,
       errors,
-      children
+      children,
+      invalidateEvent,
+      validateEvent
     });
 
     return (
-      <div className="form-group">
+      <div className={`form-group ${className}`}>
         {formElements}
       </div>
     );
   }
 }
+
+FormGroup.defaultProps = {
+  invalidateEvent: 'onBlur',
+  validateEvent: 'onChange',
+  handleInvalidForm: () => {}
+};
 
 FormGroup.propTypes = {
   children: PropTypes.node.isRequired,
@@ -134,7 +169,7 @@ FormGroup.propTypes = {
     messages: PropTypes.object.isRequired
   }),
   handleValidForm: PropTypes.func.isRequired,
-  handleInvalidForm: PropTypes.func,
+  handleInvalidForm: PropTypes.func.isRequired,
   formName: PropTypes.string.isRequired,
   values: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
@@ -144,7 +179,10 @@ FormGroup.propTypes = {
   setValidity: PropTypes.func.isRequired,
   setSingleValidity: PropTypes.func.isRequired,
   setInputValue: PropTypes.func.isRequired,
-  triggerValidate: PropTypes.func
+  triggerValidate: PropTypes.func,
+  invalidateEvent: PropTypes.string.isRequired,
+  validateEvent: PropTypes.string.isRequired,
+  className: PropTypes.string
 };
 
 function mapStateToProps(state, props) {

@@ -13,6 +13,10 @@ describe('formBuilder', () => {
     let formStateMock;
     let clonedComp;
     let clonedCompRendered;
+    const validationEvents = {
+      invalidateEvent: 'onBlur',
+      validateEvent: 'onChange'
+    };
 
     beforeEach(() => {
       formStateMock = {
@@ -28,16 +32,24 @@ describe('formBuilder', () => {
     beforeEach(() => {
       spyObj = {
         onValidateMock: () => true,
+        onInvalidateMock: () => true,
+        onFocusMock: () => true,
+        onBlurMock: () => true,
+        onFocusFromJsx: () => true,
         onChangeMock: () => true,
         onChangeFromJsx: () => true,
         onBlurFromJsx: () => true,
         onClickFromJsx: () => true
       };
+      spyOn(spyObj, 'onInvalidateMock');
       spyOn(spyObj, 'onValidateMock');
       spyOn(spyObj, 'onChangeMock');
+      spyOn(spyObj, 'onFocusMock');
+      spyOn(spyObj, 'onBlurMock');
       spyOn(spyObj, 'onChangeFromJsx');
       spyOn(spyObj, 'onBlurFromJsx');
       spyOn(spyObj, 'onClickFromJsx');
+      spyOn(spyObj, 'onFocusFromJsx');
     });
 
     beforeEach(() => {
@@ -47,6 +59,7 @@ describe('formBuilder', () => {
           <div>
             some string goes here
             <input type="text" name="firstName" id="firstName"
+              onFocus={spyObj.onFocusFromJsx}
               onChange={spyObj.onChangeFromJsx}
               onBlur={spyObj.onBlurFromJsx}
               onClick={spyObj.onClickFromJsx}
@@ -67,32 +80,16 @@ describe('formBuilder', () => {
         children: wrapper.prop('children'),
         errors: formStateMock.errors,
         values: formStateMock.values,
+        onFocus: spyObj.onFocusMock,
+        onBlur: spyObj.onBlurMock,
         onValidate: spyObj.onValidateMock,
-        onValueChange: spyObj.onChangeMock
+        onInvalidate: spyObj.onInvalidateMock,
+        onValueChange: spyObj.onChangeMock,
+        ...validationEvents
       });
       clonedCompRendered = shallow(
         <div>{ clonedComp }</div>
       );
-    });
-
-    beforeEach(() => {
-      clonedCompRendered.find('#firstName').simulate('change', {
-        target: {
-          value: 'change value'
-        }
-      });
-      clonedCompRendered.find('#firstName').simulate('blur');
-    });
-
-    it('SHOULD throw an error if a form element has no name', () => {
-      const builder = formBuilder.bind(null, {
-        children: <input type="text" />,
-        errors: formStateMock.errors,
-        values: formStateMock.values,
-        onValidate: spyObj.onValidateMock,
-        onValueChange: spyObj.onChangeMock
-      });
-      expect(builder).toThrowError();
     });
 
     it('SHOULD clone nested elements', () => {
@@ -106,19 +103,107 @@ describe('formBuilder', () => {
         .toBe(formStateMock.errors.firstName[0]);
     });
 
-    it('SHOULD attach callback handlers', () => {
-      expect(spyObj.onValidateMock).toHaveBeenCalled();
-      expect(spyObj.onChangeMock).toHaveBeenCalled();
-    });
-
-    it('SHOULD merge existing onChange and onBlur handlers that are passed via JSX', () => {
-      expect(spyObj.onChangeFromJsx).toHaveBeenCalled();
-      expect(spyObj.onBlurFromJsx).toHaveBeenCalled();
-    });
-
-    it('SHOULD merge existing form element props that are passed via JSX', () => {
+    it('SHOULD merge existing onClick props that are passed via JSX', () => {
       clonedCompRendered.find('#firstName').simulate('click');
       expect(spyObj.onClickFromJsx).toHaveBeenCalled();
     });
+
+    it('SHOULD merge existing onFocus props that are passed via JSX', () => {
+      clonedCompRendered.find('#firstName').simulate('focus');
+      expect(spyObj.onFocusFromJsx).toHaveBeenCalled();
+    });
+
+    it('SHOULD throw an error if a form element has no name', () => {
+      const builder = formBuilder.bind(null, {
+        children: <input type="text" />,
+        errors: formStateMock.errors,
+        values: formStateMock.values,
+        onValidate: spyObj.onValidateMock,
+        onInvalidate: spyObj.onInvalidateMock,
+        onValueChange: spyObj.onChangeMock,
+        ...validationEvents
+      });
+      expect(builder).toThrowError();
+    });
+
+    describe('WHEN form needs to do nothing because value has not changed', () => {
+      beforeEach(() => {
+        clonedCompRendered.find('#firstName').simulate('focus', {
+          target: {
+            value: ''
+          }
+        });
+      });
+
+      beforeEach(() => {
+        clonedCompRendered.find('#firstName').simulate('blur', {
+          target: {
+            value: ''
+          }
+        });
+      });
+
+      it('SHOULD NOT attach callback handlers', () => {
+        expect(spyObj.onInvalidateMock).not.toHaveBeenCalled();
+        expect(spyObj.onValidateMock).not.toHaveBeenCalled();
+        expect(spyObj.onChangeMock).not.toHaveBeenCalled();
+      });
+
+      it('SHOULD NOT merge existing onBlur handlers that are passed via JSX', () => {
+        expect(spyObj.onChangeFromJsx).not.toHaveBeenCalled();
+        expect(spyObj.onBlurFromJsx).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('WHEN form needs to call invalidate', () => {
+      beforeEach(() => {
+        clonedCompRendered.find('#firstName').simulate('focus', {
+          target: {
+            value: ''
+          }
+        });
+      });
+
+      beforeEach(() => {
+        clonedCompRendered.find('#firstName').simulate('blur', {
+          target: {
+            value: 'change value'
+          }
+        });
+      });
+
+      it('SHOULD call onValidate callback ONLY', () => {
+        expect(spyObj.onInvalidateMock).toHaveBeenCalled();
+        expect(spyObj.onValidateMock).not.toHaveBeenCalled();
+        expect(spyObj.onChangeMock).not.toHaveBeenCalled();
+      });
+
+      it('SHOULD merge existing onBlur handlers that are passed via JSX', () => {
+        expect(spyObj.onChangeFromJsx).not.toHaveBeenCalled();
+        expect(spyObj.onBlurFromJsx).toHaveBeenCalled();
+      });
+    });
+
+    describe('WHEN form needs to call validate', () => {
+      beforeEach(() => {
+        clonedCompRendered.find('#firstName').simulate('change', {
+          target: {
+            value: 'change value'
+          }
+        });
+      });
+
+      it('SHOULD call onInvalidate and onChange callbacks ONLY', () => {
+        expect(spyObj.onInvalidateMock).not.toHaveBeenCalled();
+        expect(spyObj.onValidateMock).toHaveBeenCalled();
+        expect(spyObj.onChangeMock).toHaveBeenCalled();
+      });
+
+      it('SHOULD merge existing onChange handlers that are passed via JSX', () => {
+        expect(spyObj.onChangeFromJsx).toHaveBeenCalled();
+        expect(spyObj.onBlurFromJsx).not.toHaveBeenCalled();
+      });
+    });
   });
 });
+

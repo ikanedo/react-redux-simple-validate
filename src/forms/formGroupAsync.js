@@ -46,19 +46,16 @@ export default class FormGroupAsync {
     Promise
       .all(promises)
       .then(() => {
-        if (!this.successCallbacks[0]) {
-          throw new Error(`${this.formName} groups success handler not implemented!`);
+        if (this.successCallbacks[0]) {
+          this.successCallbacks.forEach(fn => fn(flattenObj(this.resolvedMemo)));
         }
 
-        this.successCallbacks.forEach(fn => fn(flattenObj(this.resolvedMemo)));
         this.resolvedMemo = {};
       })
       .catch(err => {
-        if (!this.failCallbacks[0]) {
-          throw new Error(`${this.formName} groups error handler not implemented!`);
+        if (this.failCallbacks[0]) {
+          this.failCallbacks.forEach(fn => fn(err));
         }
-
-        this.failCallbacks.forEach(fn => fn(err));
       })
       .then(this.generatePromises);
   }
