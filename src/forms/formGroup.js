@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Validator from '../validators/validator';
 import formElementFromEvt from './formElement/formElementFromEvt';
@@ -149,7 +149,7 @@ export class FormGroup extends Component {
     });
 
     return (
-      <div className={`form-group ${className}`}>
+      <div className={`form-group ${className || ''}`}>
         {formElements}
       </div>
     );
@@ -162,28 +162,28 @@ FormGroup.defaultProps = {
   handleInvalidForm: () => {}
 };
 
-FormGroup.propTypes = {
-  children: PropTypes.node.isRequired,
-  validation: PropTypes.shape({
-    rules: PropTypes.object.isRequired,
-    messages: PropTypes.object.isRequired
-  }),
-  handleValidForm: PropTypes.func.isRequired,
-  handleInvalidForm: PropTypes.func.isRequired,
-  formName: PropTypes.string.isRequired,
-  values: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
-  defaultValues: PropTypes.object,
-  defaultErrors: PropTypes.object,
-  setInitialData: PropTypes.func.isRequired,
-  setValidity: PropTypes.func.isRequired,
-  setSingleValidity: PropTypes.func.isRequired,
-  setInputValue: PropTypes.func.isRequired,
-  triggerValidate: PropTypes.func,
-  invalidateEvent: PropTypes.string.isRequired,
-  validateEvent: PropTypes.string.isRequired,
-  className: PropTypes.string
-};
+// FormGroup.propTypes = {
+//   children: PropTypes.node.isRequired,
+//   validation: PropTypes.shape({
+//     rules: PropTypes.object.isRequired,
+//     messages: PropTypes.object.isRequired
+//   }),
+//   handleValidForm: PropTypes.func.isRequired,
+//   handleInvalidForm: PropTypes.func.isRequired,
+//   formName: PropTypes.string.isRequired,
+//   values: PropTypes.object.isRequired,
+//   errors: PropTypes.object.isRequired,
+//   defaultValues: PropTypes.object,
+//   defaultErrors: PropTypes.object,
+//   setInitialData: PropTypes.func.isRequired,
+//   setValidity: PropTypes.func.isRequired,
+//   setSingleValidity: PropTypes.func.isRequired,
+//   setInputValue: PropTypes.func.isRequired,
+//   triggerValidate: PropTypes.func,
+//   invalidateEvent: PropTypes.string.isRequired,
+//   validateEvent: PropTypes.string.isRequired,
+//   className: PropTypes.string
+// };
 
 function mapStateToProps(state, props) {
   const formState = state.Forms[props.formName] || {};

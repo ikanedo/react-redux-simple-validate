@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as FormActions from './formActions';
 import FormGroup from './formGroup';
@@ -33,11 +33,11 @@ export class Form extends Component {
   }
 }
 
-Form.propTypes = {
-  className: PropTypes.string,
-  formName: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
-  triggerValidate: PropTypes.func.isRequired
-};
+// Form.propTypes = {
+//   className: PropTypes.string,
+//   formName: PropTypes.string.isRequired,
+//   children: PropTypes.node.isRequired,
+//   triggerValidate: PropTypes.func.isRequired
+// };
 
 export default connect(null, FormActions)(Form);

@@ -1,6 +1,6 @@
 {
   "name": "react-redux-simple-validate",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "React Form decorator and validator inspired by jquery validate.",
   "main": "lib/index.js",
   "devDependencies": {
