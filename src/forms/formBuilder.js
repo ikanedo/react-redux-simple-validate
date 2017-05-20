@@ -16,7 +16,7 @@ function isAnErrorEl({ type }) {
 }
 
 function isAFormErrorElClass({ props }) {
-  return !!props['data-form-error'];
+  return !!props['data-form-error'] || !!props.htmlFor;
 }
 
 function getErrorMsg(name, errors) {
@@ -32,8 +32,8 @@ function getErrorElProps(element, { errors }) {
 }
 
 function getErrorClassElProps(element, { errors }) {
-  const inputName = element.props['data-form-error'];
-  const errorClassName = getErrorMsg(inputName, errors) ? '_is-error' : '';
+  const inputName = element.props['data-form-error'] || element.props.htmlFor;
+  const errorClassName = getErrorMsg(inputName, errors) ? ERROR_INPUT_CLASS_NAME : '';
 
   return {
     ...element.props,
