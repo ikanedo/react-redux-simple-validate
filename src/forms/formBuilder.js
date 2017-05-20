@@ -1,6 +1,5 @@
 import React from 'react';
-import isEmpty from 'lodash/isEmpty';
-import isFunction from 'lodash/isFunction';
+import validate from 'validate.js';
 import { isAReactEl, isAFormEl, isAFormGroup } from './formUtils';
 import { ERROR_INPUT_CLASS_NAME, HAS_VALUE_CLASS_NAME } from './formConstants';
 import { getFormElementRefName } from './formElement/formElementUtils';
@@ -43,14 +42,14 @@ function getErrorClassElProps(element, { errors }) {
 
 function mergeCallbacks(...args) {
   return (e) => {
-    args.filter(arg => isFunction(arg))
+    args.filter(arg => validate.isFunction(arg))
       .forEach(cb => cb(e));
   };
 }
 
 function getHasValueClassName(formElementValue) {
   const element = formElementValue || {};
-  return isEmpty(element.value) ? '' : HAS_VALUE_CLASS_NAME;
+  return validate.isEmpty(element.value) ? '' : HAS_VALUE_CLASS_NAME;
 }
 
 function getErrorInputClassName(name, errors) {
@@ -109,7 +108,7 @@ function getFormElProps(element, formGroupProps) {
 
   const formElementValue = formElementFromState(element, values).getKeyVal();
 
-  if (isEmpty(name)) {
+  if (validate.isEmpty(name)) {
     throw new Error(`${element.type} element is missing a name attribute!`, element);
   }
 

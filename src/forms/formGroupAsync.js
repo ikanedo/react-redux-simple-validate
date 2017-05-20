@@ -1,4 +1,4 @@
-import includes from 'lodash/includes';
+import { includes } from './formUtils';
 
 function flattenObj(obj) {
   return Object.keys(obj)

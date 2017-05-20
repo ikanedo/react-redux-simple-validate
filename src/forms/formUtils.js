@@ -1,12 +1,26 @@
 import React from 'react';
-import includes from 'lodash/includes';
-import find from 'lodash/find';
-import omit from 'lodash/omit';
-import pick from 'lodash/pick';
 import formElementFromReact from './formElement/formElementFromReact';
 
+export function includes(array, val) {
+  return array.indexOf(val) > -1;
+}
+
+export function pick(obj, keys) {
+  return Object.keys(obj)
+    .filter(key => includes(keys, key))
+    .map(key => ({ [key]: obj[key] }))
+    .reduce((prev, curr) => Object.assign(prev, curr), {});
+}
+
+export function omit(obj, keys) {
+  return Object.keys(obj)
+    .filter(key => !includes(keys, key))
+    .map(key => ({ [key]: obj[key] }))
+    .reduce((prev, curr) => Object.assign(prev, curr), {});
+}
+
 export function isAReactEl(el = '') {
-  return !!(find(React.Children.toArray(el), child => React.isValidElement(child)));
+  return !!(React.Children.toArray(el).filter(child => React.isValidElement(child))[0]);
 }
 
 export function isAFormEl({ type }) {
