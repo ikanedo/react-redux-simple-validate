@@ -112,6 +112,8 @@ const validation = {
 
 ```
 
+Other built in rules can be found in the [validate.js website](https://validatejs.org/)
+
 ### What if the rule I want is not supported?
 Internally, the code uses [validate.js](https://validatejs.org/). Please feel free to [create a new adapter](https://validatejs.org/#custom-validator) if a particular rule is not yet supported.
 
