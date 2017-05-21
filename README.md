@@ -6,14 +6,11 @@ https://github.com/ikanedo/react-redux-simple-validate
 
     % npm install react-redux-simple-validate
 
-## Demo
-For a demo project setup, see https://github.com/ikanedo/react-redux-simple-validator-example
-
 ## Usage
 
 ### Basic form component.
 
-Run the demo project and see "basicForm.js" for implementation details.
+See https://codesandbox.io/s/GZMqXLo45 for a live demo example.
 
 ```js
 
@@ -46,10 +43,8 @@ export default class BasicForm extends Component {
           handleValidForm={this.handleValidForm}
           validation={this.validation}
         >
-          <div id="add-error-class-to-this-div" data-form-error="exampleInput">
-            <input type="text" name="exampleInput" value="" />
-            <button className="button">Submit</button>
-          </div>
+          <input type="text" name="exampleInput" value="" />
+          <button className="button">Submit</button>
           <div>
             <FormError forInput="exampleInput" />
           </div>
@@ -76,11 +71,12 @@ export default class BasicForm extends Component {
 | defaultErrors     | Object   | Use this param for seeding initial error messages from the server  NOTE: This is not reactive! If you want to change the errors programmatically, then dispatch an action (FORM_DATA_REPLACE or FORM_DATA_MERGE). |
 
 ## Useful Redux State Actions
-See https://codesandbox.io/s/XoKwR2V9k for an example of how to use the following actions below. Alternatively, you can open formActions.js to see the other available action creators.
+See https://codesandbox.io/s/XoKwR2V9k for an example of how to use the following actions below.
 
 | Action Name             | Description                                                                                                                                                                                                                       |
 |-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | FORM_DATA_REPLACE       | Replaces the state with the given params(values/errors)                                                                                                                                                                           |
+| FORM_INPUT_CHANGE       | Replaces the value of a given input name                                                                                                                                                                           |
 | FORM_DATA_MERGE         | Merges the current state with the given params(values/errors)                                                                                                                                                                     |
 | FORM_RESET              | Sets values and errors to be empty.  NOTE: If you give the form element a defaultValue, it will be reverted back to that value on reset. If you want to 'clean' the form, then you will need to set the value to an empty string. |
 | FORM_TRIGGER_VALIDATION | Programmatically validate a given form name                                                                                                                                                                                                |
@@ -144,3 +140,18 @@ const validation = {
   }
 }
 ```
+
+## Advanced Usage
+### FormGroups
+FormGroups allow you to handle data from multiple groups of form elements.
+
+Use this if you have complex forms such as multi-step forms, forms that look like a single form but has multiple behaviours (like postcode lookup), or if you want to reuse a subset of your form elements in multiple components.
+
+#### How does it work?
+Promises.
+
+When all FormGroups are valid, it will fire a success callback function you specify. 
+
+When a FormGroup is invalid, it will fire a fail callback function you specify.
+
+For a demo on how to use <FormGroup>, see https://codesandbox.io/s/lYkVLWwJ7
