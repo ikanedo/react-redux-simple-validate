@@ -46,8 +46,7 @@
   "scripts": {
     "test": "karma start karma.conf.js",
     "compile": "babel --source-maps -d lib/ src/",
-    "prepublish": "npm run compile",
-    "postinstall": "jspm install"
+    "prepublish": "npm run compile"
   },
   "author": "Kane Balagtey",
   "license": "MIT",
