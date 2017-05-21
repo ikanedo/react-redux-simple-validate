@@ -19,7 +19,10 @@ export default function forms(state = {}, action) {
       return {
         ...state,
         [action.formName]: {
-          errors: action.errors,
+          errors: {
+            ...formErrors,
+            ...action.errors
+          },
           values: {
             ...formValues,
             ...action.values
