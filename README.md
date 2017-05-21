@@ -7,9 +7,6 @@ https://github.com/ikanedo/react-redux-simple-validate
     % npm install react-redux-simple-validate
 
 ## Usage
-
-### Basic form component.
-
 See https://codesandbox.io/s/GZMqXLo45 for a live demo example.
 
 ```js
@@ -82,7 +79,7 @@ See https://codesandbox.io/s/XoKwR2V9k for an example of how to use the followin
 | FORM_TRIGGER_VALIDATION | Programmatically validate a given form name                                                                                                                                                                                                |
 
 ## Validation Rules supported
-Available rules are as follows
+Basic available rules are as follows
 
 ```js
 const validation = {
@@ -114,6 +111,8 @@ Other built in rules can be found in the [validate.js website](https://validatej
 Internally, the code uses [validate.js](https://validatejs.org/). Please feel free to [create a new adapter](https://validatejs.org/#custom-validator) if a particular rule is not yet supported.
 
 ### Example custom validator
+For an example of creating a custom UK postcode validator, see https://codesandbox.io/s/ADK1ojWOp. Alternatively, you can see a short example below.
+
 ```js
 import validate from 'validate.js';
 
@@ -127,6 +126,8 @@ validate.validators.boolean = (value, options) => {
 
 Once you have created your custom validator, simply inject the custom validator to your app and use it like so
 ```js
+import './booleanValidator';
+
 const validation = {
   rules: {
     exampleInput: {
