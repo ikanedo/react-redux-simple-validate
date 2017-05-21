@@ -159,7 +159,7 @@ describe('Form Reducer', () => {
         expect(state[FORM_NAME].values['gx-number']).toBe(NUMBER_VALUE);
       });
 
-      it('SHOULD return remove all errors WHEN no errors are given', () => {
+      it('SHOULD return remove all errors WHEN errors are existing', () => {
         const PIN_VALUE = '1234';
         const state = forms({
           [FORM_NAME]: {
@@ -174,26 +174,7 @@ describe('Form Reducer', () => {
             'gx-pin': PIN_VALUE
           }
         });
-        expect(state[FORM_NAME].errors).toBeUndefined();
-      });
-
-      it('SHOULD return remove all errors WHEN empty error object is given', () => {
-        const PIN_VALUE = '1234';
-        const state = forms({
-          [FORM_NAME]: {
-            errors: {
-              'gx-number': ['this is an error']
-            }
-          }
-        }, {
-          type: CONST.FORM_DATA_MERGE,
-          formName: FORM_NAME,
-          values: {
-            'gx-pin': PIN_VALUE
-          },
-          errors: {}
-        });
-        expect(state[FORM_NAME].errors).toBeEmptyObject();
+        expect(state[FORM_NAME].errors).toBeDefined();
       });
     });
   });
