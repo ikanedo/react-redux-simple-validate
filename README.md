@@ -57,7 +57,7 @@ export default class BasicForm extends Component {
 |-----------------|----------|-------------------------------------------------------------------------------------------------|
 | formName        | String   | Unique identifier for this particular Form. This is used as the Redux ID for handling the state |
 | handleValidForm | Function | Method to call when form validation is successful                                               |
-| validation      | Object   | This contains the rules and messages, see basicForm.js for expected schema                      |
+| validation      | Object   | This contains the rules and messages, see [basicForm.js](https://codesandbox.io/s/GZMqXLo45 ) for expected schema                      |
 
 ## Optional Params
 
