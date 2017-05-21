@@ -76,7 +76,7 @@ export default class BasicForm extends Component {
 | defaultErrors     | Object   | Use this param for seeding initial error messages from the server  NOTE: This is not reactive! If you want to change the errors programmatically, then dispatch an action (FORM_DATA_REPLACE or FORM_DATA_MERGE). |
 
 ## Useful Redux State Actions
-Please see formActions.js for the related action creators. There are other actions that can be dispatched but for simplicity's sake, the actions below are probably the only ones you will need to use.
+See https://codesandbox.io/s/XoKwR2V9k for an example of how to use the following actions below. Alternatively, you can open formActions.js to see the other available action creators.
 
 | Action Name             | Description                                                                                                                                                                                                                       |
 |-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
