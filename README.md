@@ -1,4 +1,7 @@
 # react-simple-validate
+
+[![Build Status](https://travis-ci.org/ikanedo/react-redux-simple-validate.svg?branch=master)](https://travis-ci.org/ikanedo/react-redux-simple-validate)
+
 React Redux Form validator inspired by jquery validate 
 https://github.com/ikanedo/react-redux-simple-validate
 
