@@ -1,6 +1,6 @@
 {
   "name": "react-redux-simple-validate",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "React Form decorator and validator inspired by jquery validate.",
   "main": "lib/index.js",
   "devDependencies": {
@@ -33,12 +33,12 @@
     "karma-sourcemap-loader": "^0.3.7",
     "phantomjs": "^2.1.7",
     "enzyme": "^2.7.0",
+    "react-dom": "^15.4.2",
     "react-addons-test-utils": "^15.4.1",
     "redux-thunk": "^2.2.0"
   },
   "dependencies": {
     "react": "^15.4.2",
-    "react-dom": "^15.4.2",
     "react-redux": "^5.0.3",
     "redux": "^3.6.0",
     "validate.js": "^0.10.0"
