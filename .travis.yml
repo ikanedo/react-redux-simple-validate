@@ -10,5 +10,3 @@ before_install:
     - sh -e /etc/init.d/xvfb start
 before_script:
     - npm install
-    - jspm config registries.github.auth $JSPM_GITHUB_AUTH_TOKEN
-    - jspm install
