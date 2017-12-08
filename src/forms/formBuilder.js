@@ -103,7 +103,8 @@ function getFormElProps(element, formGroupProps) {
   const {
     errors,
     values,
-    onValueChange
+    onValueChange,
+    stringRefs
   } = formGroupProps;
 
   const formElementValue = formElementFromState(element, values).getKeyVal();
@@ -119,10 +120,12 @@ function getFormElProps(element, formGroupProps) {
   return {
     ...element.props,
     key: name,
-    ref: getFormElementRefName(element),
+    ref(node) {
+      stringRefs[getFormElementRefName(element)] = node;
+    },
     onChange: onChangeEvents,
     onFocus: onFocusEvents,
-    onBlur: e => {
+    onBlur: (e) => {
       const hasTheValueChanged = formElementFromEvt(e).getVal() !== lastFocusValue;
       if (hasTheValueChanged) {
         onBlurEvents(e);

@@ -4,10 +4,7 @@ import formBuilder from './formBuilder';
 import FormError from './formError';
 
 describe('formBuilder', () => {
-  describe(
-    `Iterates through each child and decorates all form elements
-    with the given callback handlers, error message, values etc.`
-  , () => {
+  describe('Iterates through each child and decorates all form elements with the given props', () => {
     let wrapper;
     let spyObj;
     let formStateMock;
@@ -55,10 +52,13 @@ describe('formBuilder', () => {
     beforeEach(() => {
       wrapper = shallow(
         <div>
-          <h2>title here <span className="icon-empty"></span> </h2>
+          <h2>title here <span className="icon-empty" /> </h2>
           <div>
-            some string goes here
-            <input type="text" name="firstName" id="firstName"
+              some string goes here
+            <input
+              type="text"
+              name="firstName"
+              id="firstName"
               onFocus={spyObj.onFocusFromJsx}
               onChange={spyObj.onChangeFromJsx}
               onBlur={spyObj.onBlurFromJsx}
@@ -87,9 +87,7 @@ describe('formBuilder', () => {
         onValueChange: spyObj.onChangeMock,
         ...validationEvents
       });
-      clonedCompRendered = shallow(
-        <div>{ clonedComp }</div>
-      );
+      clonedCompRendered = shallow(<div>{ clonedComp }</div>);
     });
 
     it('SHOULD clone nested elements', () => {

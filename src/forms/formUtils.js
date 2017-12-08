@@ -31,7 +31,7 @@ export function isAFormEl({ type }) {
 
 export function isAFormGroup({ type }) {
   if (typeof type === 'function' && type.name === 'Connect') {
-    return type.WrappedComponent.name === 'FormGroup';
+    return type.WrappedComponent.displayName === 'FormGroup';
   }
 
   return false;

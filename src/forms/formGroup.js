@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Validator from '../validators/validator';
 import formElementFromEvt from './formElement/formElementFromEvt';
@@ -6,16 +7,15 @@ import formBuilder from './formBuilder';
 import { filterValidation, getFormData } from './formUtils';
 import * as FormActions from './formActions';
 
-export class FormGroup extends Component {
+export class FormGroupDefault extends Component {
   constructor(props) {
     super(props);
     this.onValidate = this.onValidate.bind(this);
     this.onInvalidate = this.onInvalidate.bind(this);
     this.onValueChange = this.onValueChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.formValidator = new Validator(
-      filterValidation(props)
-    );
+    this.formValidator = new Validator(filterValidation(props));
+    this.stringRefs = {};
   }
 
   componentDidMount() {
@@ -37,9 +37,7 @@ export class FormGroup extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.validation !== this.props.validation) {
-      this.formValidator.setConstraints(
-        filterValidation(nextProps)
-      );
+      this.formValidator.setConstraints(filterValidation(nextProps));
     }
 
     if (nextProps.isTriggerValidation) {
@@ -68,7 +66,7 @@ export class FormGroup extends Component {
       handleValidForm,
       handleInvalidForm
     } = this.props;
-    const formData = getFormData(children, this.refs);
+    const formData = getFormData(children, this.stringRefs);
     const errorMsgs = this.formValidator.validate(formData);
     setValidity(formName, errorMsgs);
 
@@ -86,7 +84,8 @@ export class FormGroup extends Component {
       formName,
       setSingleValidity
     } = this.props;
-    const formData = getFormData(children, this.refs);
+
+    const formData = getFormData(children, this.stringRefs);
     const errorMsgs = this.formValidator.single(e.target.name, formData);
     const isValid = !errorMsgs;
 
@@ -104,7 +103,7 @@ export class FormGroup extends Component {
       formName,
       setSingleValidity
     } = this.props;
-    const formData = getFormData(children, this.refs);
+    const formData = getFormData(children, this.stringRefs);
     const errorMsgs = this.formValidator.single(e.target.name, formData);
     const isValid = !errorMsgs;
 
@@ -138,6 +137,7 @@ export class FormGroup extends Component {
       className
     } = this.props;
     const formElements = formBuilder({
+      stringRefs: this.stringRefs,
       onValidate: this.onValidate,
       onInvalidate: this.onInvalidate,
       onValueChange: this.onValueChange,
@@ -156,34 +156,35 @@ export class FormGroup extends Component {
   }
 }
 
-FormGroup.defaultProps = {
+FormGroupDefault.displayName = 'FormGroup';
+FormGroupDefault.defaultProps = {
   invalidateEvent: 'onBlur',
   validateEvent: 'onChange',
   handleInvalidForm: () => {}
 };
 
-// FormGroup.propTypes = {
-//   children: PropTypes.node.isRequired,
-//   validation: PropTypes.shape({
-//     rules: PropTypes.object.isRequired,
-//     messages: PropTypes.object.isRequired
-//   }),
-//   handleValidForm: PropTypes.func.isRequired,
-//   handleInvalidForm: PropTypes.func.isRequired,
-//   formName: PropTypes.string.isRequired,
-//   values: PropTypes.object.isRequired,
-//   errors: PropTypes.object.isRequired,
-//   defaultValues: PropTypes.object,
-//   defaultErrors: PropTypes.object,
-//   setInitialData: PropTypes.func.isRequired,
-//   setValidity: PropTypes.func.isRequired,
-//   setSingleValidity: PropTypes.func.isRequired,
-//   setInputValue: PropTypes.func.isRequired,
-//   triggerValidate: PropTypes.func,
-//   invalidateEvent: PropTypes.string.isRequired,
-//   validateEvent: PropTypes.string.isRequired,
-//   className: PropTypes.string
-// };
+FormGroupDefault.propTypes = {
+  children: PropTypes.node.isRequired,
+  validation: PropTypes.shape({
+    rules: PropTypes.object.isRequired,
+    messages: PropTypes.object.isRequired
+  }),
+  handleValidForm: PropTypes.func.isRequired,
+  handleInvalidForm: PropTypes.func,
+  formName: PropTypes.string.isRequired,
+  values: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+  defaultValues: PropTypes.object,
+  defaultErrors: PropTypes.object,
+  setInitialData: PropTypes.func.isRequired,
+  setValidity: PropTypes.func.isRequired,
+  setSingleValidity: PropTypes.func.isRequired,
+  setInputValue: PropTypes.func.isRequired,
+  triggerValidate: PropTypes.func,
+  invalidateEvent: PropTypes.string,
+  validateEvent: PropTypes.string,
+  className: PropTypes.string
+};
 
 function mapStateToProps(state, props) {
   const formState = state.Forms[props.formName] || {};
@@ -194,4 +195,4 @@ function mapStateToProps(state, props) {
   };
 }
 
-export default connect(mapStateToProps, FormActions)(FormGroup);
+export default connect(mapStateToProps, FormActions)(FormGroupDefault);

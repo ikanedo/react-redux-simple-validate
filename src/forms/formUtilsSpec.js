@@ -1,6 +1,6 @@
 import React from 'react';
-import * as utils from './formUtils';
 import { shallow } from 'enzyme';
+import * as utils from './formUtils';
 import FormGroup from './formGroup';
 
 describe('Form Utilities', () => {
@@ -266,7 +266,7 @@ describe('Form Utilities', () => {
           <div>
             <div>
               <div>
-                <div></div>
+                <div />
                 string text
                 <input name="firstName" type="checkbox" />
                 <input name="lastName" type="radio" />

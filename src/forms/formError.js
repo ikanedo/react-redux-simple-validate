@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ERROR_MSG_CLASS_NAME } from './formConstants';
 
 export default function FormError({ forInput, msg, className }) {
@@ -10,8 +11,8 @@ export default function FormError({ forInput, msg, className }) {
 }
 
 FormError.displayName = 'FormError';
-// FormError.propTypes = {
-//   forInput: PropTypes.string.isRequired,
-//   msg: PropTypes.string,
-//   className: PropTypes.string
-// };
+FormError.propTypes = {
+  forInput: PropTypes.string.isRequired,
+  msg: PropTypes.string,
+  className: PropTypes.string
+};

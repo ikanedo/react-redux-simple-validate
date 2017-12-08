@@ -15,7 +15,7 @@ export class FormElementFromReact {
     return this[this.type]();
   }
 
-  notype() {
+  notype() { // eslint-disable-line
     return null;
   }
 

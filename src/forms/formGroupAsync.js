@@ -28,18 +28,16 @@ export default class FormGroupAsync {
 
     this.resolvers = {};
     this.rejecters = {};
-    this.handlePromises(
-      this.getNames().map(groupName => {
-        if (this.resolvedMemo[groupName]) {
-          return Promise.resolve(this.resolvedMemo[groupName]);
-        }
+    this.handlePromises(this.getNames().map((groupName) => {
+      if (this.resolvedMemo[groupName]) {
+        return Promise.resolve(this.resolvedMemo[groupName]);
+      }
 
-        return new Promise((resolve, reject) => {
-          this.resolvers[groupName] = resolve;
-          this.rejecters[groupName] = reject;
-        });
-      })
-    );
+      return new Promise((resolve, reject) => {
+        this.resolvers[groupName] = resolve;
+        this.rejecters[groupName] = reject;
+      });
+    }));
   }
 
   handlePromises(promises) {
@@ -52,7 +50,7 @@ export default class FormGroupAsync {
 
         this.resolvedMemo = {};
       })
-      .catch(err => {
+      .catch((err) => {
         if (this.failCallbacks[0]) {
           this.failCallbacks.forEach(fn => fn(err));
         }
@@ -80,9 +78,7 @@ export default class FormGroupAsync {
 
   getName(key) {
     if (!(includes(this.groups, key))) {
-      throw new Error(
-        `${key} group is not found in ${this.formName} groups. Did you mispell it?`
-      );
+      throw new Error(`${key} group is not found in ${this.formName} groups. Did you mispell it?`);
     }
 
     return `${this.formName}-${key}`;

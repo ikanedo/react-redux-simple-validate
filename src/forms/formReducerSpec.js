@@ -40,9 +40,6 @@ describe('Form Reducer', () => {
           }
         });
         expect(state[FORM_NAME].values).toBeNonEmptyObject();
-        expect(state[FORM_NAME].values).toImplement({
-          'gx-pin': String
-        });
         expect(state[FORM_NAME].values['gx-pin']).toBe(PIN_VALUE);
       });
 
@@ -56,9 +53,6 @@ describe('Form Reducer', () => {
           }
         });
         expect(state[FORM_NAME].errors).toBeNonEmptyObject();
-        expect(state[FORM_NAME].errors).toImplement({
-          'gx-pin': Array
-        });
         expect(state[FORM_NAME].errors['gx-pin'][0]).toBe(ERROR_VALUE);
       });
     });
@@ -76,9 +70,6 @@ describe('Form Reducer', () => {
           }
         });
         expect(state[FORM_NAME].values).toBeNonEmptyObject();
-        expect(state[FORM_NAME].values).toImplement({
-          'gx-pin': String
-        });
         expect(state[FORM_NAME].values['gx-pin']).toBe(PIN_VALUE);
       });
 
@@ -92,9 +83,6 @@ describe('Form Reducer', () => {
           }
         });
         expect(state[FORM_NAME].errors).toBeNonEmptyObject();
-        expect(state[FORM_NAME].errors).toImplement({
-          'gx-pin': Array
-        });
         expect(state[FORM_NAME].errors['gx-pin'][0]).toBe(ERROR_VALUE);
       });
     });
@@ -112,9 +100,6 @@ describe('Form Reducer', () => {
           }
         });
         expect(state[FORM_NAME].values).toBeNonEmptyObject();
-        expect(state[FORM_NAME].values).toImplement({
-          'gx-pin': String
-        });
         expect(state[FORM_NAME].values['gx-pin']).toBe(PIN_VALUE);
       });
 
@@ -128,9 +113,6 @@ describe('Form Reducer', () => {
           }
         });
         expect(state[FORM_NAME].errors).toBeNonEmptyObject();
-        expect(state[FORM_NAME].errors).toImplement({
-          'gx-pin': Array
-        });
         expect(state[FORM_NAME].errors['gx-pin'][0]).toBe(ERROR_VALUE);
       });
 
@@ -151,10 +133,6 @@ describe('Form Reducer', () => {
           }
         });
         expect(state[FORM_NAME].values).toBeNonEmptyObject();
-        expect(state[FORM_NAME].values).toImplement({
-          'gx-pin': String,
-          'gx-number': String
-        });
         expect(state[FORM_NAME].values['gx-pin']).toBe(PIN_VALUE);
         expect(state[FORM_NAME].values['gx-number']).toBe(NUMBER_VALUE);
       });
@@ -190,9 +168,6 @@ describe('Form Reducer', () => {
           }
         });
         expect(state[FORM_NAME].values).toBeNonEmptyObject();
-        expect(state[FORM_NAME].values).toImplement({
-          'gx-pin': String
-        });
       });
 
       it('SHOULD return the state of sibling inputs, IF there are any', () => {
@@ -210,10 +185,6 @@ describe('Form Reducer', () => {
           }
         });
         expect(state[FORM_NAME].values).toBeNonEmptyObject();
-        expect(state[FORM_NAME].values).toImplement({
-          'gx-pin': String,
-          'gx-number': String
-        });
       });
 
       it('SHOULD always return a new state', () => {
@@ -256,9 +227,6 @@ describe('Form Reducer', () => {
         });
 
         expect(state).toHaveMember('dummyProp');
-        expect(state[FORM_NAME]).toImplement({
-          errors: Object
-        });
       });
     });
   });
@@ -274,9 +242,6 @@ describe('Form Reducer', () => {
           }
         });
         expect(state[FORM_NAME]).toBeNonEmptyObject();
-        expect(state[FORM_NAME]).toImplement({
-          errors: Object
-        });
         expect(state.Giftcard.errors['gx-pin']).toBeArrayOfStrings();
       });
 
@@ -320,9 +285,6 @@ describe('Form Reducer', () => {
           }
         });
         expect(state[FORM_NAME]).toBeNonEmptyObject();
-        expect(state[FORM_NAME]).toImplement({
-          errors: Object
-        });
         expect(state.Giftcard.errors['gx-pin']).toBeArrayOfStrings();
       });
 

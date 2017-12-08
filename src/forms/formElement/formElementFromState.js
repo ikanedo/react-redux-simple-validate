@@ -15,7 +15,7 @@ export class FormElementFromState {
   }
 
   getKeyVal() {
-    if (this.stateValues.hasOwnProperty(this.name)) {
+    if (this.stateValues.hasOwnProperty(this.name)) { // eslint-disable-line
       return this[this.type]();
     }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ERROR_MSG_CLASS_NAME } from './formConstants';
-import FormError from 'src/forms/formError';
+import FormError from './formError';
 
 describe('Form Error', () => {
   it('should render error className', () => {

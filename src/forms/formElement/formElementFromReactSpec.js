@@ -24,9 +24,7 @@ describe('FormElementFromReact', () => {
 
       it('SHOULD return undefined for untouched form elements', () => {
         const name = 'undefinedEl';
-        const inputValue = formElementFromReact(
-          <input type="text" name={name} />, {}
-        ).getKeyVal();
+        const inputValue = formElementFromReact(<input type="text" name={name} />, {}).getKeyVal();
         expect(inputValue.name).toBeUndefined();
       });
 
@@ -34,36 +32,28 @@ describe('FormElementFromReact', () => {
         const INPUT = 'text-member';
         const mock = mockInputAndRef('text', INPUT);
         const inputValue = formElementFromReact(mock.input, mock.refs).getKeyVal();
-        expect(inputValue).toImplement({
-          [INPUT]: String
-        });
+        expect(inputValue).toBeNonEmptyObject();
       });
 
       it('SHOULD return the value for password input elements', () => {
         const INPUT = 'password-member';
         const mock = mockInputAndRef('password', INPUT);
         const inputValue = formElementFromReact(mock.input, mock.refs).getKeyVal();
-        expect(inputValue).toImplement({
-          [INPUT]: String
-        });
+        expect(inputValue).toBeNonEmptyObject();
       });
 
       it('SHOULD return the value for email input elements', () => {
         const INPUT = 'email-member';
         const mock = mockInputAndRef('email', INPUT);
         const inputValue = formElementFromReact(mock.input, mock.refs).getKeyVal();
-        expect(inputValue).toImplement({
-          [INPUT]: String
-        });
+        expect(inputValue).toBeNonEmptyObject();
       });
 
       it('SHOULD return the value for number input elements', () => {
         const INPUT = 'number-member';
         const mock = mockInputAndRef('number', INPUT, 123);
         const inputValue = formElementFromReact(mock.input, mock.refs).getKeyVal();
-        expect(inputValue).toImplement({
-          [INPUT]: Number
-        });
+        expect(inputValue).toBeNonEmptyObject();
       });
     });
 
@@ -107,9 +97,7 @@ describe('FormElementFromReact', () => {
         }
       };
       const inputValue = formElementFromReact(checkbox, refs).getKeyVal();
-      expect(inputValue).toImplement({
-        [CHKBOX_NAME]: Boolean
-      });
+      expect(inputValue).toBeNonEmptyObject();
     });
 
     it('SHOULD return value for selected radio inputs', () => {

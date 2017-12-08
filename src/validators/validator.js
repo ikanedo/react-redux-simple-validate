@@ -19,19 +19,19 @@ function transformToObject(prev, current) {
 
 function adaptRuleAndMsg(valRulesAndMsg, key) {
   return Object.keys(valRulesAndMsg.rules[key])
-              .map((rule) => ({
-                [rule]: {
-                  [rule]: valRulesAndMsg.rules[key][rule],
-                  message: getMessage(valRulesAndMsg.messages[key][rule])
-                }
-              }))
-              .reduce(transformToObject, {});
+    .map(rule => ({
+      [rule]: {
+        [rule]: valRulesAndMsg.rules[key][rule],
+        message: getMessage(valRulesAndMsg.messages[key][rule])
+      }
+    }))
+    .reduce(transformToObject, {});
 }
 
 function adaptConstraints(valRulesAndMsg) {
   return Object.keys(valRulesAndMsg.rules)
-              .map((key) => ({ [key]: adaptRuleAndMsg(valRulesAndMsg, key) }))
-              .reduce(transformToObject, {});
+    .map(key => ({ [key]: adaptRuleAndMsg(valRulesAndMsg, key) }))
+    .reduce(transformToObject, {});
 }
 
 export default class Validate {

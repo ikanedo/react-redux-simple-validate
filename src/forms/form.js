@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as FormActions from './formActions';
 import FormGroup from './formGroup';
 
-export class Form extends Component {
+export class FormDefault extends Component {
   constructor() {
     super();
     this.onSubmit = this.onSubmit.bind(this);
@@ -33,11 +34,11 @@ export class Form extends Component {
   }
 }
 
-// Form.propTypes = {
-//   className: PropTypes.string,
-//   formName: PropTypes.string.isRequired,
-//   children: PropTypes.node.isRequired,
-//   triggerValidate: PropTypes.func.isRequired
-// };
+FormDefault.propTypes = {
+  className: PropTypes.string,
+  formName: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  triggerValidate: PropTypes.func.isRequired
+};
 
-export default connect(null, FormActions)(Form);
+export default connect(null, FormActions)(FormDefault);
