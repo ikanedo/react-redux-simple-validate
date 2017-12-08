@@ -4,7 +4,7 @@ node_js:
 env:
   global:
     - secure: "izwGo5NQHBt5KkuoSJ45aJFyTYgwQWr9jC3WDPF5jMymbOvKTwAOnEENWEa/6GUslXkBUIKlpPWG+c2sz33aY+CJbA9nhAurZD1GmPtOjk38ziGp5ub0w6YfA+78QDhj8XsOKm+v6zSRD+uNsKUqQo7clNUwgvpqrNb8yHGVCfP1s1I0Ag9Bo76/TFSUm1DqfXn3tD+6A610b9cGuhbZlnVVrI6OutZDLioXJMNMMVqDjw0ZP48Za0vCGxqfQzQUVvD6Eh54H/1KPjcgmRHngSMImNQcqLlGVtaixmbZqYACfCUOMMVcv15b+JooYAGuV20JaGP5ln6njpeEh8lSi+2krwfFcwELgesD1wh0LTiwaJQ2CXEpw07czo1hfs7qdARsRxkc6QkrPkdGqHKvcp3ZdxNzROX4lmrnwUmwB+GOEZWF97fB6q2jCvJnUQvMChmHsrFhsdKca8WldbLDvl8kmnSrstXYCTBtyYoFghqZGiXxSrJR+N9bFxVqIO8M48gjqlwW+QKyX6kY7Lrn3M9x2jpZVYe9wkwhb0hvNB5HBjz0t66mCrm7a0aVfPu1AfWIUKpbzWLEZZi2Gnw5iVy/PDBJe9kaMBFJ3wgl5mA1YkZesbxrYPdykJb7WZe/KOiHP0I/eUcroTLtOVpNXis4dhTuS5kh2v/i5lezVXg="
-script: node_modules/karma/bin/karma start karma.conf.js --single-run
+script: npm test
 before_install:
     - export DISPLAY=:99.0
     - sh -e /etc/init.d/xvfb start
