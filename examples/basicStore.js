@@ -6,9 +6,11 @@ const basicFormReducer = combineReducers({
   Forms
 });
 
-export const store = createStore(
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // eslint-disable-line
+
+export default createStore(
   basicFormReducer,
-  compose(
+  composeEnhancer(
     applyMiddleware()
   )
 );

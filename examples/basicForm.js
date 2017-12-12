@@ -42,7 +42,8 @@ class BasicUpdateFormGroup extends Component {
   replaceMultiValue() {
     const { name, setDataReplace } = this.props;
     setDataReplace(name, {
-      exampleInput2: 'my new data replace 2'
+      exampleInput2: 'my new data replace 2',
+      exampleInput3: 'my new data replace 3'
     });
   }
 
@@ -61,7 +62,7 @@ class BasicUpdateFormGroup extends Component {
     reset(name);
   }
 
-  handleValidForm(data) {
+  handleValidForm(data) { // eslint-disable-line
     console.log(JSON.stringify(data));
   }
 
@@ -75,14 +76,21 @@ class BasicUpdateFormGroup extends Component {
           handleValidForm={this.handleValidForm}
           validation={this.validation}
         >
-          <label htmlFor="exampleInput">Input 1 Label</label>
-          <input type="text" id="exampleInput" name="exampleInput" value="" placeholder="input 1" />
-          <FormError forInput="exampleInput" />
-          <br />
-          <input type="text" id="exampleInput2" name="exampleInput2" value="" placeholder="input 2" />
-          <br />
-          <input type="text" id="exampleInput3" name="exampleInput3" value="" placeholder="input 3" />
-          <br />
+          <label htmlFor="exampleInput">
+            Input 1 Label
+            <input type="text" id="exampleInput" name="exampleInput" value="" placeholder="input 1" />
+            <FormError forInput="exampleInput" />
+          </label>
+          <label htmlFor="exampleInput2">
+            Input 2 Label
+            <input type="text" id="exampleInput2" name="exampleInput2" value="" placeholder="input 2" />
+            <FormError forInput="exampleInput2" />
+          </label>
+          <label htmlFor="exampleInput3">
+            Input 3 Label
+            <input type="text" id="exampleInput3" name="exampleInput3" value="" placeholder="input 3" />
+            <FormError forInput="exampleInput3" />
+          </label>
           <button>Submit</button><br /><br />
         </Form>
         <hr />

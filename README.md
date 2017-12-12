@@ -71,7 +71,7 @@ export default class BasicForm extends Component {
 | defaultErrors     | Object   | Use this param for seeding initial error messages from the server  NOTE: This is not reactive! If you want to change the errors programmatically, then dispatch an action (FORM_DATA_REPLACE or FORM_DATA_MERGE). |
 
 ## Useful Redux State Actions
-See https://codesandbox.io/s/XoKwR2V9k for an example of how to use the following actions below.
+See https://codesandbox.io/s/qlmyl35m44 for an example of how to use the following actions below.
 
 | Action Name             | Description                                                                                                                                                                                                                       |
 |-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -146,16 +146,5 @@ const validation = {
 ```
 
 ## Advanced Usage
-### FormGroups
-FormGroups allow you to handle data from multiple groups of form elements.
 
-Use this if you have complex forms such as multi-step forms, forms that look like a single form but has multiple behaviours (like postcode lookup), or if you want to reuse a subset of your form elements in multiple components.
-
-#### How does it work?
-Promises.
-
-When all FormGroups are valid, it will fire a success callback function you specify. 
-
-When a FormGroup is invalid, it will fire a fail callback function you specify.
-
-For a demo on how to use <FormGroup>, see https://codesandbox.io/s/lYkVLWwJ7
+See the documentation for [FormGroups](docs/form-groups.md) if you want to build more complex forms.
