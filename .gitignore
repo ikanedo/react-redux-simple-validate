@@ -1,5 +1,5 @@
 node_modules
 coverage
-jspm_packages
 npm-debug.log
 dist
+.nyc_output

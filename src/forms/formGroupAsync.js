@@ -44,15 +44,21 @@ export default class FormGroupAsync {
     Promise
       .all(promises)
       .then(() => {
+        /* istanbul ignore next */
         if (this.successCallbacks[0]) {
           this.successCallbacks.forEach(fn => fn(flattenObj(this.resolvedMemo)));
+        } else {
+          console.warn('No success callback specified');
         }
 
         this.resolvedMemo = {};
       })
       .catch((err) => {
+        /* istanbul ignore next */
         if (this.failCallbacks[0]) {
           this.failCallbacks.forEach(fn => fn(err));
+        } else {
+          console.warn('No fail callback specified');
         }
       })
       .then(this.generatePromises);
@@ -93,6 +99,7 @@ export default class FormGroupAsync {
     return this;
   }
 
+  // use single callback if you want to override the previous success callback instead of executing all
   then(fn, isSingleCallback = false) {
     if (isSingleCallback) {
       this.successCallbacks = [fn.bind(this)];

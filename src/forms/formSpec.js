@@ -24,17 +24,26 @@ describe('Form Container', () => {
         <Provider store={store}>
           <ConnectedForm
             handleValidForm={() => true}
+            handleInvalidForm={() => true}
             action="/"
             formName="Giftcard"
             validation={validationObj}
             className="extra-class"
             defaultValues={defaultValues}
+            validateEvent="onBlur"
+            invalidateEvent="onBlur"
           >
             This is a string for the form which should not cause build form to break
-            <div>
-              <input name="gx-number" id="gxNumber" type="text" />
+            <div id="gx-holder" data-form-error="gx-pin">
+              <label htmlFor="gx-number">
+                GX Number
+                <input name="gx-number" id="gx-number" type="text" />
+              </label>
               <FormError forInput="gx-number" />
-              <input name="gx-pin" id="gxPin" type="text" />
+              <label id="gx-pin-abel" htmlFor="gx-pin">
+                GX Pin
+                <input name="gx-pin" id="gx-pin" type="text" />
+              </label>
               <FormError forInput="gx-pin" />
               <div id="nestedDiv">nested string</div>
             </div>
@@ -115,8 +124,20 @@ describe('Form Container', () => {
                 wrapper.find('form').simulate('submit');
               });
 
+              it('SHOULD execute validate and invalidate events', () => {
+                wrapper.find('#gx-pin')
+                  .simulate('change', { target: { value: '12345' } })
+                  .simulate('blur', { target: { value: '12345' } })
+                  .simulate('change', { target: { value: '1' } })
+                  .simulate('blur', { target: { value: '1' } });
+                /*
+                  no need to expect, test is validated by making sure
+                  'getValidateEvents' in formBuilder is 100% test covered
+                */
+              });
+
               it('SHOULD add error input class', () => {
-                expect(wrapper.find('#gxNumber').hasClass(CONST.ERROR_INPUT_CLASS_NAME)).toBe(true);
+                expect(wrapper.find('#gx-number').hasClass(CONST.ERROR_INPUT_CLASS_NAME)).toBe(true);
               });
 
               it('SHOULD show error message', () => {
@@ -144,7 +165,7 @@ describe('Form Container', () => {
                 });
 
                 it('SHOULD remove error input class', () => {
-                  expect(wrapper.find('#gxNumber')
+                  expect(wrapper.find('#gx-number')
                     .hasClass(CONST.ERROR_INPUT_CLASS_NAME)).toBe(false);
                 });
                 it('SHOULD remove error message', () => {
@@ -175,7 +196,15 @@ describe('Form Container', () => {
               });
 
               it('SHOULD add error input class', () => {
-                expect(wrapper.find('#gxPin').hasClass(CONST.ERROR_INPUT_CLASS_NAME)).toBe(true);
+                expect(wrapper.find('#gx-pin').hasClass(CONST.ERROR_INPUT_CLASS_NAME)).toBe(true);
+              });
+
+              it('SHOULD add error class to a data-form-error element', () => {
+                expect(wrapper.find('#gx-holder').hasClass(CONST.ERROR_INPUT_CLASS_NAME)).toBe(true);
+              });
+
+              it('SHOULD add error class to input element label', () => {
+                expect(wrapper.find('#gx-pin-abel').hasClass(CONST.ERROR_INPUT_CLASS_NAME)).toBe(true);
               });
 
               it('SHOULD show error message', () => {

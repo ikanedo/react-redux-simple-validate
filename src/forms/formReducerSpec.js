@@ -17,6 +17,13 @@ describe('Form Reducer', () => {
     };
   });
 
+  describe('WHEN state does not exist', () => {
+    it('SHOULD return an empty object', () => {
+      const state = forms();
+      expect(state).toBeEmptyObject();
+    });
+  });
+
   describe('WHEN action type does not exist', () => {
     it('SHOULD return the last know state', () => {
       const state = forms({

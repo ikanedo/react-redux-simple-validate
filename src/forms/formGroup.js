@@ -7,7 +7,7 @@ import formBuilder from './formBuilder';
 import { filterValidation, getFormData } from './formUtils';
 import * as FormActions from './formActions';
 
-export class FormGroupDefault extends Component {
+class FormGroupDefault extends Component {
   constructor(props) {
     super(props);
     this.onValidate = this.onValidate.bind(this);
@@ -160,7 +160,7 @@ FormGroupDefault.displayName = 'FormGroup';
 FormGroupDefault.defaultProps = {
   invalidateEvent: 'onBlur',
   validateEvent: 'onChange',
-  handleInvalidForm: () => {}
+  handleInvalidForm() {}
 };
 
 FormGroupDefault.propTypes = {

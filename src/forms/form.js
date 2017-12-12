@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import * as FormActions from './formActions';
 import FormGroup from './formGroup';
 
-export class FormDefault extends Component {
+class FormDefault extends Component {
+  /* istanbul ignore next */
   constructor() {
     super();
     this.onSubmit = this.onSubmit.bind(this);

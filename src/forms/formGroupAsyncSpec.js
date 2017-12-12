@@ -78,6 +78,63 @@ describe('FormGroupAsync', () => {
             expect(spyObj.fn).toHaveBeenCalled();
           });
         });
+
+        describe('then - success callback method', () => {
+          describe('single call back only', () => {
+            it('SHOULD call the last then method only', (done) => {
+              const mockPersonalDetails = { firstName: 'John' };
+              const mockDeliveryDetails = { line1: '123 Downing St.' };
+              const resolvedAsync = new FormGroupAsync({
+                formName: 'addressForm',
+                groups: ['personal', 'address']
+              });
+
+              resolvedAsync.resolve(
+                mockPersonalDetails,
+                resolvedAsync.getName(mockForm.groups[0])
+              );
+              resolvedAsync.resolve(
+                mockDeliveryDetails,
+                resolvedAsync.getName(mockForm.groups[1])
+              );
+
+              resolvedAsync.then((formData) => {
+                expect(formData.line1).toBe('THIS SHOULD NOT BE EXECUTED');
+                done();
+              }, true).then((formData) => {
+                expect(formData.firstName).toBe(mockPersonalDetails.firstName);
+                expect(formData.line1).toBe(mockDeliveryDetails.line1);
+                done();
+              }, true).fail(err => done.fail(`Error handler is called WHEN not intended | ${err}`));
+            });
+          });
+        });
+      });
+
+      describe('fail - error callback method', () => {
+        describe('single call back only', () => {
+          it('SHOULD call the last fail method only', (done) => {
+            const rejectedAsync = new FormGroupAsync({
+              formName: 'addressForm',
+              groups: ['personal', 'address']
+            });
+            const groupName = rejectedAsync.getName(mockForm.groups[0]);
+
+            rejectedAsync.reject(
+              ['error message'],
+              groupName
+            );
+
+            rejectedAsync.fail((err) => {
+              expect(err).toBe('THIS SHOULD NOT BE EXECUTED');
+              done();
+            }).fail((err) => {
+              expect(err).toBeArrayOfStrings();
+              expect(rejectedAsync.resolvedMemo[groupName]).toBeNull();
+              done();
+            }, true);
+          });
+        });
       });
 
       describe('Handling promises', () => {

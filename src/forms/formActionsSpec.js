@@ -95,6 +95,21 @@ describe('Form Actions', () => {
     });
   });
 
+  describe('setSingleValidity', () => {
+    describe('Tell the reducer whether this form element has error messages or not', () => {
+      it('SHOULD return with the correct action type', () => {
+        const action = Action.setSingleValidity({});
+        expect(action).toHaveMember('type');
+        expect(action.type).toBe(CONST.FORM_SINGLE_VALIDATE);
+      });
+
+      it('SHOULD return an error message array member', () => {
+        const action = Action.setSingleValidity({});
+        expect(action).toHaveMember('errors');
+      });
+    });
+  });
+
   describe('setInputValue', () => {
     describe('Tell the reducer that the value of an input element has changed', () => {
       it('SHOULD return with the correct action type', () => {
@@ -123,16 +138,17 @@ describe('Form Actions', () => {
   describe('triggerValidate', () => {
     describe('Tell the reducer to validate the form given', () => {
       it('SHOULD return with the correct action type', () => {
-        const action = Action.triggerValidate({});
+        let action = Action.triggerValidate('formName');
+        expect(action).toHaveMember('type');
+        expect(action.type).toBe(CONST.FORM_TRIGGER_VALIDATION);
+
+        action = Action.triggerValidate('formName', true);
         expect(action).toHaveMember('type');
         expect(action.type).toBe(CONST.FORM_TRIGGER_VALIDATION);
       });
 
       it('SHOULD return with the given params - formName, trigger', () => {
-        const action = Action.triggerValidate({
-          formName: 'dummy',
-          trigger: false
-        });
+        const action = Action.triggerValidate('formName', false);
         expect(action).toHaveMember('formName');
         expect(action).toHaveMember('trigger');
       });

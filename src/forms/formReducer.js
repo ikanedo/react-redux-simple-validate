@@ -1,7 +1,7 @@
 import * as CONST from './formConstants';
 
-export default function forms(state = {}, action) {
-  const form = state[action.formName] || {};
+export default function forms(state = {}, action = {}) {
+  const form = state[action.formName || ''] || {};
   const formValues = form.values || {};
   const formErrors = form.errors || {};
 
