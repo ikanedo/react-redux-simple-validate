@@ -48,6 +48,7 @@
     "pretest": "eslint 'src/**/*.js'",
     "test": "babel-node spec/run.js",
     "coverage": "nyc -r=html -x=**/*Spec.js npm test",
+    "report-coverage": "nyc report --reporter=lcov > coverage.lcov && codecov --token=a4926647-dc06-4763-993a-6b14aee48808",
     "compile": "babel --source-maps -d lib/ src/",
     "prepublish": "npm run compile"
   },
