@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { FormGroup, FormError, FormActions, FormGroupAsync } from 'react-redux-simple-validate';
 import validationRules from './validation';
 import PhoneNumber from './phoneNumber';
+import RegionGroup from './regionGroup';
 
 class BasicFormGroupAsync extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class BasicFormGroupAsync extends Component {
     this.validation = validationRules;
     this.onSubmit = this.onSubmit.bind(this);
     this.handleValidForm = this.handleValidForm.bind(this);
+    this.resetRegion = this.resetRegion.bind(this);
 
     /*
       Initialise FormGroupAsync
@@ -18,7 +20,7 @@ class BasicFormGroupAsync extends Component {
     */
     this.formGroups = new FormGroupAsync({
       formName: props.name,
-      groups: ['details', 'address', 'phoneNumber']
+      groups: ['details', 'address', 'phoneNumber', 'region']
     });
   }
 
@@ -44,6 +46,10 @@ class BasicFormGroupAsync extends Component {
 
   handleValidForm(data) { // eslint-disable-line
     console.log('All group data is ready to send!', data);
+  }
+
+  resetRegion() {
+    this.props.reset(this.formGroups.getName('region')); // this is a FormActions method
   }
 
   render() {
@@ -124,7 +130,19 @@ class BasicFormGroupAsync extends Component {
               <input name="town" type="text" id="town" value="" />
               <FormError forInput="town" />
             </div>
+            <div className="form-input">
+              <label htmlFor="postalCode">Postal Code</label>
+              <input name="postalCode" type="text" id="postalCode" value="" />
+              <FormError forInput="postalCode" />
+            </div>
           </FormGroup>
+
+          <hr />
+          <RegionGroup
+            formGroups={this.formGroups}
+            validation={this.validation}
+            resetRegion={this.resetRegion}
+          />
         </fieldset>
         <hr />
         <PhoneNumber

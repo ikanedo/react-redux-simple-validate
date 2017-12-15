@@ -18,7 +18,9 @@ describe('Validator', () => {
         rulesAndMessageMock = {
           rules: {
             'gx-number': {
-              required: true
+              required: true,
+              minlength: 4,
+              maxlength: 50
             },
             'gx-pin': {
               required: true,
@@ -29,11 +31,15 @@ describe('Validator', () => {
             'gx-number': {
               required() {
                 return 'Please enter a valid giftcard number';
-              }
+              },
+              minlength: {
+                nestedMsg: 'Please show nested message' // for babel coverage
+              },
+              maxlength: undefined // for babel coverage
             },
             'gx-pin': {
               required: 'Please enter a valid giftcard pin',
-              minlength: 'It has to be 4 characters long'
+              minlength: 'It has to be 4 characters long',
             }
           }
         };
