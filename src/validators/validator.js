@@ -10,6 +10,10 @@ function getMessage(msg) {
     return msg;
   }
 
+  if (typeof msg === 'object') {
+    return msg;
+  }
+
   return `^${msg}`;
 }
 

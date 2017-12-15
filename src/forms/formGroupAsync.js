@@ -14,11 +14,47 @@ export default class FormGroupAsync {
     this.resolve = this.resolve.bind(this);
     this.reject = this.reject.bind(this);
     this.generatePromises = this.generatePromises.bind(this);
+    this.setGroups = this.setGroups.bind(this);
 
     this.successCallbacks = [];
     this.failCallbacks = [];
 
     this.resolvedMemo = {};
+    this.generatePromises();
+  }
+
+  setGroups(groups) {
+    if (!Array.isArray(groups)) {
+      throw new Error(`${groups} - Group name is expected to be a string`);
+    }
+
+    this.groups = groups;
+    this.generatePromises();
+  }
+
+  addGroup(groupKeyToAdd) {
+    if (typeof groupKeyToAdd !== 'string') {
+      throw new Error(`${groupKeyToAdd} - Group name is expected to be a string`);
+    }
+
+    this.groups = [
+      ...this.groups,
+      groupKeyToAdd
+    ];
+    this.generatePromises();
+  }
+
+  removeGroup(groupKeyToRemove, isForceRemove) {
+    if (typeof groupKeyToRemove !== 'string') {
+      throw new Error(`${groupKeyToRemove} - Group name is expected to be a string`);
+    }
+
+    const hasGroupKey = this.groups.filter(group => group === groupKeyToRemove)[0];
+    if (!hasGroupKey && !isForceRemove) {
+      throw new Error(`${groupKeyToRemove} - Group to remove is not found. Did you mispell it?`);
+    }
+
+    this.groups = this.groups.filter(group => group !== groupKeyToRemove);
     this.generatePromises();
   }
 
@@ -47,8 +83,6 @@ export default class FormGroupAsync {
         /* istanbul ignore next */
         if (this.successCallbacks[0]) {
           this.successCallbacks.forEach(fn => fn(flattenObj(this.resolvedMemo)));
-        } else {
-          console.warn('No success callback specified');
         }
 
         this.resolvedMemo = {};
@@ -57,8 +91,6 @@ export default class FormGroupAsync {
         /* istanbul ignore next */
         if (this.failCallbacks[0]) {
           this.failCallbacks.forEach(fn => fn(err));
-        } else {
-          console.warn('No fail callback specified');
         }
       })
       .then(this.generatePromises);

@@ -30,6 +30,7 @@
     "jsdom-global": "3.0.2",
     "nyc": "^11.3.0",
     "path": "^0.12.7",
+    "pre-commit": "^1.2.2",
     "redux-thunk": "^2.2.0",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7"

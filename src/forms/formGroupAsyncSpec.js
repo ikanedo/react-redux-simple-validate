@@ -79,6 +79,49 @@ describe('FormGroupAsync', () => {
           });
         });
 
+        describe('setGroups', () => {
+          it('SHOULD set formGroups promises', () => {
+            expect(formGroupAsync.groups).toEqual(jasmine.arrayContaining(['personal', 'address']));
+            formGroupAsync.setGroups(['personal']);
+            expect(formGroupAsync.groups).toEqual(jasmine.arrayContaining(['personal']));
+            expect(formGroupAsync.groups).not.toEqual(jasmine.arrayContaining(['personal', 'address']));
+          });
+
+          it('SHOULD throw an error if not string', () => {
+            expect(formGroupAsync.setGroups.bind(formGroupAsync, 'newGroup')).toThrowAnyError();
+          });
+        });
+
+        describe('addGroup', () => {
+          it('SHOULD add formGroup name', () => {
+            expect(formGroupAsync.groups).toEqual(jasmine.arrayContaining(['personal', 'address']));
+            formGroupAsync.addGroup('newGroup');
+            expect(formGroupAsync.groups).toEqual(jasmine.arrayContaining(['personal', 'address', 'newGroup']));
+          });
+
+          it('SHOULD throw an error if not string', () => {
+            expect(formGroupAsync.addGroup.bind(formGroupAsync, ['newGroup'])).toThrowAnyError();
+          });
+        });
+
+        describe('removeGroup', () => {
+          it('SHOULD set formGroups promises', () => {
+            expect(formGroupAsync.groups).toEqual(jasmine.arrayContaining(['personal', 'address']));
+            formGroupAsync.removeGroup('personal');
+            expect(formGroupAsync.groups).not.toEqual(jasmine.arrayContaining(['personal']));
+          });
+
+          it('SHOULD throw an error if not string', () => {
+            expect(formGroupAsync.removeGroup.bind(formGroupAsync, ['newGroup'])).toThrowAnyError();
+          });
+
+          it('SHOULD throw an error if not string', () => {
+            expect(formGroupAsync.removeGroup.bind(formGroupAsync, 'newGroup')).toThrowAnyError();
+            expect(formGroupAsync.removeGroup.bind(formGroupAsync, 'personal')).not.toThrowAnyError();
+            expect(formGroupAsync.removeGroup.bind(formGroupAsync, 'newGroup', true)).not.toThrowAnyError();
+          });
+        });
+
         describe('then - success callback method', () => {
           describe('single call back only', () => {
             it('SHOULD call the last then method only', (done) => {
