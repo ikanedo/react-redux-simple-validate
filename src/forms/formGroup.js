@@ -52,8 +52,8 @@ class FormGroupDefault extends Component {
       errors,
       children
     } = this.props;
-    const isSameValues = values === nextProps.values;
-    const isSameErrors = errors === nextProps.errors;
+    const isSameValues = JSON.stringify(values) === JSON.stringify(nextProps.values);
+    const isSameErrors = JSON.stringify(errors) === JSON.stringify(nextProps.errors);
     const isSameChildren = children === nextProps.children;
     return !(isSameValues && isSameErrors && isSameChildren);
   }

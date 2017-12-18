@@ -5,6 +5,10 @@
 React Redux Form validator inspired by jquery validate 
 https://github.com/ikanedo/react-redux-simple-validate
 
+## Prerequisite
+
+    % npm install react react-dom redux react-redux
+
 ## Installation
 
     % npm install react-redux-simple-validate
