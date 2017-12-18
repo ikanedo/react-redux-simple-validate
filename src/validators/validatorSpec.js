@@ -61,6 +61,10 @@ describe('Validator', () => {
             const reqMsg = rulesAndMessageMock.messages['gx-pin'].required;
             expect(constraints['gx-pin'].required.message).toContain(reqMsg);
           });
+
+          it('SHOULD return helpers as NULL', () => {
+            expect(constraints['gx-number'].required.helpers).toBe(null);
+          });
         });
       });
 
@@ -77,6 +81,13 @@ describe('Validator', () => {
               'gx-number': {
                 required: 'Please enter a valid giftcard number'
               }
+            },
+            helpers: {
+              'gx-number': {
+                required: {
+                  get() {}
+                }
+              }
             }
           });
           constraints = formValidator.constraints; // eslint-disable-line
@@ -84,6 +95,10 @@ describe('Validator', () => {
 
         it('SHOULD replace the old constraint with the given constraints', () => {
           expect(constraints['gx-pin']).toBeUndefined();
+        });
+
+        it('SHOULD return the given helpers', () => {
+          expect(constraints['gx-number'].required.helpers).toHaveMember('get');
         });
       });
 

@@ -22,11 +22,13 @@ function transformToObject(prev, current) {
 }
 
 function adaptRuleAndMsg(valRulesAndMsg, key) {
+  const helpers = (valRulesAndMsg.helpers || {})[key] || {};
   return Object.keys(valRulesAndMsg.rules[key])
     .map(rule => ({
       [rule]: {
         [rule]: valRulesAndMsg.rules[key][rule],
-        message: getMessage(valRulesAndMsg.messages[key][rule])
+        message: getMessage(valRulesAndMsg.messages[key][rule]),
+        helpers: helpers[rule] || null
       }
     }))
     .reduce(transformToObject, {});
