@@ -73,7 +73,7 @@ export function getFormData(children, refs) {
   }).reduce((prev, current) => Object.assign({}, prev, current), {});
 }
 
-export function pickValidation({ rules, messages, helpers }, keys) {
+export function pickValidation({ rules, messages, helpers = {} }, keys) {
   return {
     rules: pick(rules, keys),
     messages: pick(messages, keys),
@@ -81,7 +81,7 @@ export function pickValidation({ rules, messages, helpers }, keys) {
   };
 }
 
-export function omitValidation({ rules, messages, helpers }, keys) {
+export function omitValidation({ rules, messages, helpers = {} }, keys) {
   return {
     rules: omit(rules, keys),
     messages: omit(messages, keys),
