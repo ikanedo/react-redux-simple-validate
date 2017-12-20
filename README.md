@@ -121,7 +121,7 @@ Internally, the code uses [validate.js](https://validatejs.org/). Please feel fr
 For an example of creating a custom UK postcode validator, see https://codesandbox.io/s/ADK1ojWOp. Alternatively, you can see a short example below.
 
 ```js
-import validate from 'validate.js';
+import { validate } from 'react-redux-simple-validate';
 
 const isThisABoolean = value => typeof(value) === "boolean";
 
