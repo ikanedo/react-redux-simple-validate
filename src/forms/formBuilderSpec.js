@@ -147,9 +147,8 @@ describe('formBuilder', () => {
         expect(spyObj.onChangeMock).not.toHaveBeenCalled();
       });
 
-      it('SHOULD NOT merge existing onBlur handlers that are passed via JSX', () => {
-        expect(spyObj.onChangeFromJsx).not.toHaveBeenCalled();
-        expect(spyObj.onBlurFromJsx).not.toHaveBeenCalled();
+      it('SHOULD merge existing onBlur handlers that are passed via JSX', () => {
+        expect(spyObj.onBlurFromJsx).toHaveBeenCalled();
       });
     });
 

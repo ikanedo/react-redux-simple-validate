@@ -95,7 +95,7 @@ function getFormElProps(element, formGroupProps) {
   const {
     name,
     onChange,
-    onBlur,
+    onBlur: onBlurProp,
     onFocus,
     className
   } = element.props;
@@ -113,9 +113,10 @@ function getFormElProps(element, formGroupProps) {
     throw new Error(`${element.type} element is missing a name attribute!`, element);
   }
 
+
   const onChangeEvents = mergeCallbacks(onValueChange, onChange, getValidateEvents('onChange', formGroupProps));
   const onFocusEvents = mergeCallbacks(onFocus, getLastFocusValue, getValidateEvents('onFocus', formGroupProps));
-  const onBlurEvents = mergeCallbacks(onBlur, getValidateEvents('onBlur', formGroupProps));
+  const onBlurEvents = mergeCallbacks(getValidateEvents('onBlur', formGroupProps));
 
   return {
     ...element.props,
@@ -126,6 +127,10 @@ function getFormElProps(element, formGroupProps) {
     onChange: onChangeEvents,
     onFocus: onFocusEvents,
     onBlur: (e) => {
+      if (onBlurProp) {
+        onBlurProp(e);
+      }
+
       const hasTheValueChanged = formElementFromEvt(e).getVal() !== lastFocusValue;
       if (hasTheValueChanged) {
         onBlurEvents(e);
