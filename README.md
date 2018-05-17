@@ -14,7 +14,7 @@ https://github.com/ikanedo/react-redux-simple-validate
     % npm install react-redux-simple-validate
 
 ## Usage
-See https://codesandbox.io/s/GZMqXLo45 for a live demo example.
+See https://codesandbox.io/s/zxwwx9vw6m for a live demo example.
 
 ```js
 
@@ -64,7 +64,7 @@ export default class BasicForm extends Component {
 |-----------------|----------|-------------------------------------------------------------------------------------------------|
 | formName        | String   | Unique identifier for this particular Form. This is used as the Redux ID for handling the state |
 | handleValidForm | Function | Method to call when form validation is successful                                               |
-| validation      | Object   | This contains the rules and messages, see [basicForm.js](https://codesandbox.io/s/GZMqXLo45 ) for expected schema                      |
+| validation      | Object   | This contains the rules and messages, see [basicForm.js](https://codesandbox.io/s/q3pr7x8jpq ) for expected schema                      |
 
 ## Optional Params
 
@@ -75,7 +75,7 @@ export default class BasicForm extends Component {
 | defaultErrors     | Object   | Use this param for seeding initial error messages from the server  NOTE: This is not reactive! If you want to change the errors programmatically, then dispatch an action (FORM_DATA_REPLACE or FORM_DATA_MERGE). |
 
 ## Useful Redux State Actions
-See https://codesandbox.io/s/qlmyl35m44 for an example of how to use the following actions below.
+See https://codesandbox.io/s/qq87xzkrxq for an example of how to use the following actions below.
 
 | Action Name             | Description                                                                                                                                                                                                                       |
 |-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -118,7 +118,7 @@ Other built in rules can be found in the [validate.js website](https://validatej
 Internally, the code uses [validate.js](https://validatejs.org/). Please feel free to [create a new adapter](https://validatejs.org/#custom-validator) if a particular rule is not yet supported.
 
 ### Example custom validator
-For an example of creating a custom UK postcode validator, see https://codesandbox.io/s/ADK1ojWOp. Alternatively, you can see a short example below.
+For an example of creating a custom UK postcode validator, see https://codesandbox.io/s/pw1x7o5wpj. Alternatively, you can see a short example below.
 
 ```js
 import { validate } from 'react-redux-simple-validate';
