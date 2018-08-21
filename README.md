@@ -115,40 +115,18 @@ const validation = {
 Other built in rules can be found in the [validate.js website](https://validatejs.org/)
 
 ### What if the rule I want is not supported?
-Internally, the code uses [validate.js](https://validatejs.org/). Please feel free to [create a new adapter](https://validatejs.org/#custom-validator) if a particular rule is not yet supported.
-
-### Example custom validator
-For an example of creating a custom UK postcode validator, see https://codesandbox.io/s/pw1x7o5wpj. Alternatively, you can see a short example below.
-
-```js
-import { validate } from 'react-redux-simple-validate';
-
-const isThisABoolean = value => typeof(value) === "boolean";
-
-validate.validators.boolean = (value, options) => {  
-  return isThisABoolean(value) ? null : options.message;
-};
-
-```
-
-Once you have created your custom validator, simply inject the custom validator to your app and use it like so
-```js
-import './booleanValidator';
-
-const validation = {
-  rules: {
-    exampleInput: {
-      boolean: true
-    }
-  },
-  messages: {
-    exampleInput: {
-      boolean: 'The value passed is not TRUE or FALSE'
-    }
-  }
-}
-```
+[See the FAQ - How do I create a custom validation rule?](docs/faq.md#how-do-i-remove-validation-errors-programmatically-)
 
 ## Advanced Usage
 
 See the documentation for [FormGroups](docs/form-groups.md) if you want to build more complex forms.
+
+## FAQ
+
+[See all FAQs](docs/faq.md).
+1. [How do I create a custom input component?](docs/faq.md#how-do-i-create-a-custom-input-component-)
+1. [How do I change an input value programmatically?](docs/faq.md#how-do-i-change-an-input-value-programmatically-)
+1. [How do I ADD validation errors programmatically?](docs/faq.md#how-do-i-add-validation-errors-programmatically-)
+1. [How do I REMOVE validation errors programmatically?](docs/faq.md#how-do-i-remove-validation-errors-programmatically-)
+1. [How do I change when each input field is validated?](docs/faq.md#how-do-i-change-when-each-input-field-is-validated-)
+1. [How do I split my form into multiple components?](docs/faq.md#how-do-i-split-my-form-into-multiple-components-)
