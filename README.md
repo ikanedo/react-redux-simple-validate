@@ -130,3 +130,4 @@ See the documentation for [FormGroups](docs/form-groups.md) if you want to build
 1. [How do I REMOVE validation errors programmatically?](docs/faq.md#how-do-i-remove-validation-errors-programmatically-)
 1. [How do I change when each input field is validated?](docs/faq.md#how-do-i-change-when-each-input-field-is-validated-)
 1. [How do I split my form into multiple components?](docs/faq.md#how-do-i-split-my-form-into-multiple-components-)
+1. [How do I validate some input fields but not others?](docs/faq.md#how-do-i-validate-some-input-fields-but-not-others-)
