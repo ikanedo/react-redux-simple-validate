@@ -115,7 +115,7 @@ const validation = {
 Other built in rules can be found in the [validate.js website](https://validatejs.org/)
 
 ### What if the rule I want is not supported?
-[See the FAQ - How do I create a custom validation rule?](docs/faq.md#how-do-i-remove-validation-errors-programmatically)
+[See the FAQ - How do I create a custom validation rule?](docs/faq.md#how-do-i-create-a-custom-validation-rule)
 
 ## Advanced Usage
 
