@@ -109,6 +109,24 @@ function getFormElProps(element, formGroupProps) {
 
   const formElementValue = formElementFromState(element, values).getKeyVal();
 
+  if (
+    stringRefs
+    && element.props
+    && element.props.value
+    && formElementValue != null
+    && stringRefs[`${getFormElementRefName(element)}-value`]
+    && element.props.value !== stringRefs[`${getFormElementRefName(element)}-value`]
+    && element.props.value !== formElementValue.value
+  ) {
+    console.warn(`You are trying to change the value prop of "${name}" but the Redux state for this element is already set.
+      React Props: "${element.props.value}"
+      Redux State: "${formElementValue && formElementValue.value}"
+
+      In this case, Redux is believed as the source of truth. See the docs if you are having issues changing the value of "${name}".
+      https://github.com/ikanedo/react-redux-simple-validate/blob/master/docs/faq.md#why-is-my-input-value-not-changing
+    `);
+  }
+
   if (validate.isEmpty(name)) {
     throw new Error(`${element.type} element is missing a name attribute!`, element);
   }
@@ -123,6 +141,7 @@ function getFormElProps(element, formGroupProps) {
     key: name,
     ref(node) {
       stringRefs[getFormElementRefName(element)] = node;
+      stringRefs[`${getFormElementRefName(element)}-value`] = element.props.value;
     },
     onChange: onChangeEvents,
     onFocus: onFocusEvents,

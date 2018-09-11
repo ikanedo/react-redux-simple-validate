@@ -65,7 +65,7 @@ For a working example, please see the following examples
 2. Password input with mask toggle - https://codesandbox.io/s/5k13v713x4
 
 ## How do I change an input value programmatically?
-You need to dispatch one of the following redux actions
+The form data is stored in Redux. Therefore, you need to dispatch one of the following redux actions to manipulate the value.
 
 1. `setInputValue(formName, { inputName: 'value' })`
 2. `setDataReplace(formName, { inputName: 'value' })`
@@ -120,3 +120,26 @@ You would need to group your input fields into different **FormGroups**.
 For a working example please see https://codesandbox.io/s/ox145n0w3z
 
 Please see the [documentation for FormGroups](form-groups.md) for more information on this topic.
+
+## Why is my input value not changing?
+
+Trying to change the input value by passing down the value prop to the input element might not work as expected. It is OK to do so if you are only adding a default value OR the input value is not coming from multiple sources (props, state, redux state, DOM/user input). 
+
+The code below might not always work if you are expecting the data to change dynamically.
+
+```js
+<Form {...someProps}>
+  <input value={this.props.propValue} name="myName" />
+</Form>
+```
+
+```js
+<Form {...someProps}>
+  <input value={this.state.stateValue} name="myName2" />
+</Form>
+```
+
+### Why is this?
+If the input data is received from multiple sources, then the code will always choose the Redux state as the latest source of truth. The only time it uses props passed down is when the Redux state is not yet created. Since the form data is stored in Redux, the recommended way to change the value is to dispatch a Redux action.
+
+Please see - [How do I change an input value programmatically?](#how-do-i-change-an-input-value-programmatically) - for more information
