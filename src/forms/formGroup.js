@@ -35,27 +35,33 @@ class FormGroupDefault extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.validation !== this.props.validation) {
-      this.formValidator.setConstraints(filterValidation(nextProps));
-    }
-
-    if (nextProps.isTriggerValidation) {
-      this.onSubmit();
-      this.props.triggerValidate(nextProps.formName, false);
-    }
-  }
-
   shouldComponentUpdate(nextProps) {
     const {
       values,
       errors,
       children
     } = this.props;
+
+    if (nextProps.isTriggerValidation) {
+      return true;
+    }
+
     const isSameValues = JSON.stringify(values) === JSON.stringify(nextProps.values);
     const isSameErrors = JSON.stringify(errors) === JSON.stringify(nextProps.errors);
     const isSameChildren = children === nextProps.children;
+
     return !(isSameValues && isSameErrors && isSameChildren);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.validation !== this.props.validation) {
+      this.formValidator.setConstraints(filterValidation(prevProps));
+    }
+
+    if (this.props.isTriggerValidation) {
+      this.onSubmit();
+      this.props.triggerValidate(this.props.formName, false);
+    }
   }
 
   onSubmit() {
