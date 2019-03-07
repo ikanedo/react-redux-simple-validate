@@ -77,7 +77,7 @@ class BasicUpdateFormGroup extends Component {
           validation={this.validation}
         >
           <label htmlFor="exampleInput">
-            Input 1 Label
+            Required Input*
             <input type="text" id="exampleInput" name="exampleInput" value="" placeholder="input 1" />
             <FormError forInput="exampleInput" />
           </label>

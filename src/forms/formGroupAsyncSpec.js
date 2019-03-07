@@ -27,11 +27,11 @@ describe('FormGroupAsync', () => {
         it(`SHOULD init all the necessary public methods
         (resolve, reject, getName, getNames, each, success, fail)
         `, () => {
-            expect(formGroupAsync.resolve).toBeFunction();
-            expect(formGroupAsync.reject).toBeFunction();
-            expect(formGroupAsync.getName).toBeFunction();
-            expect(formGroupAsync.getNames).toBeFunction();
-          });
+          expect(formGroupAsync.resolve).toBeFunction();
+          expect(formGroupAsync.reject).toBeFunction();
+          expect(formGroupAsync.getName).toBeFunction();
+          expect(formGroupAsync.getNames).toBeFunction();
+        });
 
         it('SHOULD generate all the resolve callbacks with the correct names', () => {
           expect(formGroupAsync.resolvers)
